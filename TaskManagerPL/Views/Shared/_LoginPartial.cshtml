@@ -1,0 +1,60 @@
+﻿@if (Request.IsAuthenticated) {
+    <text>
+        Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }
+    </text>
+} else {
+   
+      <form class="from-horizontal" >
+        <div class="control-group">
+            <p></p>
+            <p></p>
+            <div class="row-fluid">
+                <div class="pull-rigth">
+                <div class="span3">
+                   <label class="control-label" for="inputEmail"> Email</label>
+                </div>
+                </div>            
+                <div class="span9">
+                    <div class="controls">
+                        <input type="email" id="inputEmail" placeholder="Email" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="row-fluid">
+                <div class="pull-rigth">
+                <div class="span3">
+                  <label class="control-label" for="inputPassword">Password</label>
+                </div>
+                </div>
+                <div class="span9">
+                    <div class="controls">
+                        <input type="password" id="inputPassword" placeholder="Password" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="row-fluid">
+                <div class="pull-rigth">
+                <div class="span5">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="checkbox" /> Remember me
+                        </label>
+                    </div>
+                </div>
+                </div>
+                <div class="span7">
+                        <button type="submit" class="btn">Login</button>
+                </div>
+            </div>
+        </div>
+     
+    </form>
+}
