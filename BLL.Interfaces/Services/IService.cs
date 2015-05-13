@@ -11,7 +11,7 @@ namespace BLL.Interfaces
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetSingle(int key);
-        IEnumerable<TEntity> Find(params Expression<Func<TEntity, bool>>[] predicates);
+        TEntity Find(Func<TEntity, bool> f); 
 
         void Add(TEntity entity);
         void Edit(TEntity entity);

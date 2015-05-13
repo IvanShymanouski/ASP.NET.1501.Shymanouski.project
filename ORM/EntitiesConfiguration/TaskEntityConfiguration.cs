@@ -13,6 +13,11 @@ namespace ORM
         {
             this.HasKey<int>(t => t.Id);
 
+            this.Property(t => t.Title).IsRequired(); 
+
+            this.Property(t => t.Description).IsRequired();
+
+            this.Property(t => t.Progress).IsRequired();
         }
     }
 }

@@ -2,9 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace TaskManagerPL.Models
-{
-
-
+{ 
     public class LoginModel
     {
         [Required]

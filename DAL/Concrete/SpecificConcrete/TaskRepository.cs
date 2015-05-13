@@ -7,7 +7,7 @@ using ORM;
 
 namespace DAL
 {
-    public class TaskRepository : BaseRepository<TaskDal, Task>, ITaskRepository
+    public class TaskRepository : BaseRepository<TaskDal, Task, TaskMapper>, ITaskRepository
     {
         public TaskRepository(IUnitOfWork uow) : base(uow) { }
 

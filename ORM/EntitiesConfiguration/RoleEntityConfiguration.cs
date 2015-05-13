@@ -14,9 +14,7 @@ namespace ORM
         {          
             this.HasKey<int>(r => r.Id);
 
-            this.Property(r => r.Name).IsRequired();
-
-            this.Property(r => r.Discription).IsOptional();
+            this.Property(r => r.Name).IsRequired(); 
         }
     }
 }

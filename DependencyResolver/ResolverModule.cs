@@ -29,13 +29,11 @@ namespace DependencyResolver
 
             Bind<ITaskRepository>().To<TaskRepository>();
             Bind<IRoleRepository>().To<RoleRepository>();
-            Bind<IUserRepository>().To<UserRepository>();
-            Bind<IProfileRepository>().To<ProfileRepository>();
+            Bind<IUserRepository>().To<UserRepository>(); 
 
             Bind<IUserService>().To<UserService>();
             Bind<IRoleService>().To<RoleService>();
-            Bind<ITaskService>().To<TaskService>();
-            Bind<IProfileService>().To<ProfileService>();
+            Bind<ITaskService>().To<TaskService>(); 
 
             Bind<IUnitOfWork>().To<UnitOfWork>();
 

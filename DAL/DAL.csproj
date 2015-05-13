@@ -58,13 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Concrete\BaseRepository.cs" />
-    <Compile Include="Concrete\SpecificConcrete\ProfileRepository.cs" />
     <Compile Include="Concrete\SpecificConcrete\RoleRepository.cs" />
     <Compile Include="Concrete\SpecificConcrete\TaskRepository.cs" />
     <Compile Include="Concrete\SpecificConcrete\UserRepository.cs" />
-    <Compile Include="Concrete\UnitOfWork\UnitOfWork.cs" />
-    <Compile Include="IMapperModel.cs" />
-    <Compile Include="Mappres\DALMappers.cs" />
+    <Compile Include="Concrete\UnitOfWork.cs" />
+    <Compile Include="Mappres\IMapper.cs" />
+    <Compile Include="Mappres\SpecificMappers\RoleMapper.cs" />
+    <Compile Include="Mappres\SpecificMappers\TaskMapper.cs" />
+    <Compile Include="Mappres\SpecificMappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

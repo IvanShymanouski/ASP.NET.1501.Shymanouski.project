@@ -10,14 +10,22 @@ namespace BLL
 {
     public class RoleMapper : IMapper<RoleEntity, RoleDal>
     {
-        public RoleEntity ToBll(RoleDal dalEntity)
+        public RoleEntity ToBll(RoleDal role)
         {
-            return dalEntity.ToBll();
+            return new RoleEntity()
+            {
+                Id = role.Id,
+                Name = role.Name,
+            };
         }
 
-        public RoleDal ToDal(RoleEntity bllEntity)
+        public RoleDal ToDal(RoleEntity role)
         {
-            return bllEntity.ToDalFromBll();
+            return new RoleDal()
+            {
+                Id = role.Id,
+                Name = role.Name,
+            };
         }
     }
 }

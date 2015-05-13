@@ -1,8 +1,11 @@
-﻿ using System.Linq; 
+﻿using System;
+using System.Linq; 
 using System.Web.Mvc;
 using System.Web.Security;
 using TaskManagerPL.Models;
 using TaskManagerPL.Providers;
+using Microsoft.Web.WebPages.OAuth;
+using WebMatrix.WebData;
 using BLL.Interfaces;
 
 namespace TaskManagerPL.Controllers
@@ -37,8 +40,8 @@ namespace TaskManagerPL.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
 
-                    UserEntity user = userService.Find((u => u.Email == model.Email)).FirstOrDefault();
-                    RoleEntity role = roleService.Find((r => r.Id == user.RoleId)).FirstOrDefault();
+                    UserEntity user = userService.Find((u => u.Email == model.Email));
+                    RoleEntity role = roleService.Find((r => r.Id == user.RoleId));
 
                     if (Url.IsLocalUrl(returnUrl))
                     {
@@ -50,6 +53,8 @@ namespace TaskManagerPL.Controllers
                             return RedirectToAction("Index", "Home", new { area = "Admin" });
                         if (role.Name == "User")
                             return RedirectToAction("Index", "Home", new { area = "Simple_User" });
+                        if (role.Name == "Manager")
+                            return RedirectToAction("Index", "Home", new { area = "Manager" });
                     }
                 }
                 else
@@ -89,7 +94,7 @@ namespace TaskManagerPL.Controllers
                     ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Email, model.Password);
                 if (membershipUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Email, false);
+                    //FormsAuthentication.SetAuthCookie(model.Email, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -100,7 +105,8 @@ namespace TaskManagerPL.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
-        }
+        } 
+
 
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
@@ -139,5 +145,6 @@ namespace TaskManagerPL.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
+         
     }
 }

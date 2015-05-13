@@ -17,8 +17,8 @@ namespace ORM
         }
 
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<User> Users { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,9 +26,9 @@ namespace ORM
             // modelBuilder.HasDefaultSchema("Manager");
 
             // Set configuration files for tables of database.
-            modelBuilder.Configurations.Add(new UserEntityConfiguration());
             modelBuilder.Configurations.Add(new RoleEntityConfiguration());
             modelBuilder.Configurations.Add(new TaskEntityConfiguration());
+            modelBuilder.Configurations.Add(new UserEntityConfiguration());
 
         }
 

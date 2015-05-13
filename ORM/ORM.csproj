@@ -53,7 +53,6 @@
     <Compile Include="EntitiesConfiguration\UserEntityConfiguration.cs" />
     <Compile Include="EntityModel.cs" />
     <Compile Include="Initialize\InitializeEntityModel.cs" />
-    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />

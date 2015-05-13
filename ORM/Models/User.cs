@@ -13,13 +13,17 @@ namespace ORM
     {
         public int Id { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string Password { get; set; } 
 
 
-        public int? RoleId { get; set; }
+        public int RoleId { get; set; }
         [ForeignKey("RoleId")]
         public virtual Role Role { get; set; }
 
+        public virtual ICollection<Task> Tasks { get; set; }
+        public User()
+        {
+            Tasks = new List<Task>();
+        }
     }
 }

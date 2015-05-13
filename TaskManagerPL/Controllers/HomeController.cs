@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TaskManagerPL.Models;
+using TaskManagerPL.Providers;
 using BLL.Interfaces;
 
 namespace TaskManagerPL.Controllers
@@ -18,10 +20,9 @@ namespace TaskManagerPL.Controllers
 
         public ActionResult Index()
         {
-
             ViewBag.Title = "Index";
             return View();
-        }
+        } 
 
         public ActionResult About()
         {

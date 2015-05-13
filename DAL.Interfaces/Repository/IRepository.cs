@@ -13,8 +13,6 @@ namespace DAL.Interfaces
 
         TEntity GetByID(int key);
 
-        IEnumerable<TEntity> GetByPredicate(Expression<Func<TEntity, bool>>[] f);
-
         void Create(TEntity entity);
         void Delete(TEntity entity);
         void Update(TEntity entity);

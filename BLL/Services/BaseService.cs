@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
 
 using EntityBase;
 using DAL.Interfaces;
-using BLL.Interfaces;
-using AutoMapper;
+using BLL.Interfaces; 
 
 namespace BLL
 {
@@ -23,23 +21,9 @@ namespace BLL
         protected IMapper<TEntity, TDto> _entityMapper = new TEntityMapper();
 
         public BaseService(TRepository repository, IUnitOfWork uow)
-        {
-            Mapper.CreateMap<TDto, TEntity>();
-            Mapper.CreateMap<TEntity, TDto>();
+        { 
             this._repository = repository;
             this._uow = uow;
-        }
-
-        protected TEntity GetEntity(TDto dto)
-        {
-            var entity = _entityMapper.ToBll(dto);
-            return entity;
-        }
-
-        protected TDto GetDto(TEntity entity)
-        {
-            var dto = _entityMapper.ToDal(entity);
-            return dto;
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -53,16 +37,9 @@ namespace BLL
             return GetEntity(dto);
         }
 
-        public virtual IEnumerable<TEntity> Find(params System.Linq.Expressions.Expression<Func<TEntity, bool>>[] predicates)
+        public virtual TEntity Find(Func<TEntity, bool> f)
         {
-
-            Expression<Func<TDto, bool>>[] predicatesDto = new Expression<Func<TDto, bool>>[predicates.Length];
-            int i = 0;
-            foreach (var p in predicates)
-            {
-                predicatesDto[i++] = ChangeInputType<TEntity, TDto, bool>(p);
-            }
-            return _repository.GetByPredicate(predicatesDto).Select(GetEntity);
+            return _repository.GetAll().Select(GetEntity).FirstOrDefault(f);
         }
 
         public virtual void Add(TEntity entity)
@@ -86,28 +63,17 @@ namespace BLL
             _uow.Commit();
         }
 
-        private Expression<Func<TDto, bool>> ChangeInputType<TEntity, TDto, TResult>(Expression<Func<TEntity, bool>> expression)
+        protected TEntity GetEntity(TDto dto)
         {
-            //if (!typeof(TEntity).IsAssignableFrom(typeof(TDto)))
-            //    throw new Exception(string.Format("{0} is not assignable from {1}.", typeof(TEntity), typeof(TDto)));
-            var beforeParameter = expression.Parameters.Single();
-            var afterParameter = Expression.Parameter(typeof(TDto), beforeParameter.Name);
-            var visitor = new SubstitutionExpressionVisitor(beforeParameter, afterParameter);
-            return Expression.Lambda<Func<TDto, bool>>(visitor.Visit(expression.Body), afterParameter);
+            var entity = _entityMapper.ToBll(dto);
+            return entity;
         }
-    }
 
-    public class SubstitutionExpressionVisitor : ExpressionVisitor
-    {
-        private Expression before, after;
-        public SubstitutionExpressionVisitor(Expression before, Expression after)
+        protected TDto GetDto(TEntity entity)
         {
-            this.before = before;
-            this.after = after;
+            var dto = _entityMapper.ToDal(entity);
+            return dto;
         }
-        public override Expression Visit(Expression node)
-        {
-            return node == before ? after : base.Visit(node);
-        }
+ 
     }
 }

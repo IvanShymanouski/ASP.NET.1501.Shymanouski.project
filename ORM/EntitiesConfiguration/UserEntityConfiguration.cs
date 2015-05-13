@@ -12,10 +12,11 @@ namespace ORM
         public UserEntityConfiguration()
         {
             // PK
-            this.HasKey<int>(u => u.Id); 
+            this.HasKey<int>(u => u.Id);
 
-            this.Property(u => u.RoleId).IsOptional();
+            this.Property(u => u.Email).IsRequired();
 
+            this.Property(u => u.Password).IsRequired(); 
 
         }
     }

@@ -8,7 +8,7 @@ using ORM;
 
 namespace DAL
 {
-    public class UserRepository : BaseRepository<UserDal, User>, IUserRepository
+    public class UserRepository : BaseRepository<UserDal, User, UserMapper>, IUserRepository
     {
         public UserRepository(IUnitOfWork uow) : base(uow) { }
 

@@ -10,14 +10,26 @@ namespace BLL
 {
     public class UserMapper : IMapper<UserEntity, UserDal>
     {
-        public UserEntity ToBll(UserDal dalEntity)
+        public UserEntity ToBll(UserDal user)
         {
-            return dalEntity.ToBll();
+            return new UserEntity()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Password = user.Password,
+                RoleId = user.RoleId
+            };
         }
 
-        public UserDal ToDal(UserEntity bllEntity)
+        public UserDal ToDal(UserEntity user)
         {
-            return bllEntity.ToDalFromBll();
+            return new UserDal()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Password = user.Password,
+                RoleId = user.RoleId
+            };
         }
     }
 }

@@ -10,14 +10,28 @@ namespace BLL
 {
     public class TaskMapper : IMapper<TaskEntity, TaskDal>
     {
-        public TaskEntity ToBll(TaskDal dalEntity)
+        public TaskEntity ToBll(TaskDal task)
         {
-            return dalEntity.ToBll();
+            return new TaskEntity()
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+                Progress = task.Progress
+
+            };
         }
 
-        public TaskDal ToDal(TaskEntity bllEntity)
+        public TaskDal ToDal(TaskEntity task)
         {
-            return bllEntity.ToDalFromBll();
+            return new TaskDal()
+            {
+                Id = task.Id,
+                Title = task.Title,
+                Description = task.Description,
+                Progress = task.Progress
+
+            };
         }
     }
 }

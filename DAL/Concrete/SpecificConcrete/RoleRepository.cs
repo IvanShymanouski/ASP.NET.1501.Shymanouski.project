@@ -8,7 +8,7 @@ using ORM;
 
 namespace DAL
 {
-    public class RoleRepository : BaseRepository<RoleDal, Role>, IRoleRepository
+    public class RoleRepository : BaseRepository<RoleDal, Role, RoleMapper>, IRoleRepository
     {
         public RoleRepository(IUnitOfWork uow) : base(uow) { }
 

@@ -31,7 +31,7 @@ namespace TaskManagerPL.Providers
                         isValid = true;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     isValid = false;
                 }
@@ -52,7 +52,7 @@ namespace TaskManagerPL.Providers
                         User user = new User();
                         user.Email = email;
                         user.Password = Crypto.HashPassword(password);
-                        user.CreationDate = DateTime.Now;
+
 
                         Role role = (from r in _db.Roles
                                      where r.Name == "User"
@@ -71,7 +71,7 @@ namespace TaskManagerPL.Providers
                         return membershipUser;
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
                     return null;
                 }
@@ -92,12 +92,12 @@ namespace TaskManagerPL.Providers
                     {
                         User user = users.First();
                         MembershipUser memberUser = new MembershipUser("CustomerMembershipProvider", user.Email, null, null, null, null,
-                            false, false, user.CreationDate, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
+                            false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                         return memberUser;
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }

@@ -49,16 +49,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="DTO\ProfileDal.cs" />
     <Compile Include="DTO\RoleDal.cs" />
     <Compile Include="DTO\TaskDal.cs" />
     <Compile Include="DTO\UserDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\SpecificRepository\IProfileRepository.cs" />
     <Compile Include="Repository\SpecificRepository\IRoleRepository.cs" />
     <Compile Include="Repository\SpecificRepository\ITaskRepository.cs" />
     <Compile Include="Repository\SpecificRepository\IUserRepository.cs" />
-    <Compile Include="Repository\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
