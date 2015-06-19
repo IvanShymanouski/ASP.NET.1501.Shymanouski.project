@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "CreateTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model TaskManager.Models.TaskModel
+
+<h2>CreateTask or live the page</h2>
+
+@using (Html.BeginForm("CreateTask","TaskEditor",FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Enter task below</legend>
+        <p>
+           @Html.LabelFor(m => m.Title)<br>
+           @Html.TextBoxFor(m => m.Title)
+        </p>
+        <p>
+           @Html.LabelFor(m => m.Description)<br>
+           @Html.TextAreaFor(m => m.Description)
+        </p>
+        <input type="submit" value="Create task" />
+    </fieldset>
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    }
+}

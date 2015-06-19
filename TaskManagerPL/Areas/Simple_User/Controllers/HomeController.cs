@@ -13,10 +13,10 @@ namespace TaskManagerPL.Areas.Simple_User.Controllers
         //
         // GET: /Simple_User/HomeUser/
 
-        private readonly IUserService userService;
-        private readonly IRoleService roleService;
+        private readonly IService<UserEntity> userService;
+        private readonly IService<RoleEntity> roleService;
 
-        public HomeController(IRoleService roleService, IUserService userService)
+        public HomeController(IService<RoleEntity> roleService, IService<UserEntity> userService)
         {
             this.roleService = roleService;
             this.userService = userService;

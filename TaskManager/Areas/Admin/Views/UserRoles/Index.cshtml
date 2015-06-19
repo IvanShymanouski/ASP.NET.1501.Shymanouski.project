@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "User roles manipulations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript"
+   src="@Url.Content("~/scripts/Admin/JsonGetterPutAjax.js")">
+</script>
+
+<b><p>What action?</p></b>
+@Html.RadioButton("deleteOrChange", "change", true)
+<span>Change role</span> <br />
+@Html.RadioButton("deleteOrChange", "delete", false)
+<span>Delete user</span> <br />
+
+<b><p>Role to user search:</p></b>
+
+@foreach(var role in (string[])ViewBag.roles)
+{
+    @Html.RadioButton("roles", role)
+    <span>@role</span> <br />
+}
+
+<div>
+  <b><p id="SelectedRole"></p></b>
+  <p id="JsonGetter"></p>
+</div>
+ 
+<div id="selectReplace" hidden>
+    <div id ="ChsRoleForRepl">
+        <b><p>Choose role for replace:</p></b>
+        @foreach(var role in (string[])ViewBag.roles)
+        {
+            @Html.RadioButton("replace", role)
+            <span>@role</span> <br />
+        }
+        
+        <br>
+    </div>
+    <a href="index" id="replaceLink">Change role</a>
+</div>

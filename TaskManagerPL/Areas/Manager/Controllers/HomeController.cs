@@ -13,10 +13,10 @@ namespace TaskManagerPL.Areas.Manager.Controllers
         //
         // GET: /Manager/Manager/
 
-        private readonly IUserService userService;
-        private readonly IRoleService roleService;
+        private readonly IHasIdService<UserEntity> userService;
+        private readonly IHasIdService<RoleEntity> roleService;
 
-        public HomeController(IRoleService roleService, IUserService userService)
+        public HomeController(IHasIdService<RoleEntity> roleService,IHasIdService<UserEntity> userService)
         {
             this.roleService = roleService;
             this.userService = userService;
@@ -24,7 +24,7 @@ namespace TaskManagerPL.Areas.Manager.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Users = userService.GetAll().Where((x)=>x.RoleId==2);
+            ViewBag.Users = userService.GetAll().Where((x)=>x.RoleId==Guid.Empty);
             return View("~/Areas/Manager/Views/Home/Index.cshtml");
         }
 

@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntityBase;
+﻿using BLL.Interfaces;
+using DAL.Interfaces;
 
 namespace BLL
 {
-    public interface IMapper<TBllEntity, TDalEntity>
-        where TBllEntity : IEntity
-        where TDalEntity : IEntity
+    public interface IMapper<TDALEntity, TBLLEntity>
+        where TDALEntity : IDALEntity
+        where TBLLEntity : IBLLEntity
     {
-        TBllEntity ToBll(TDalEntity dalEntity);
-        TDalEntity ToDal(TBllEntity bllEntity);
+        TDALEntity ToDAL(TBLLEntity bllEntity);
+        TBLLEntity ToBLL(TDALEntity dalEntity);
     }
 }

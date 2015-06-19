@@ -1,0 +1,22 @@
+﻿@{    
+    ViewBag.Title = "TaskViewer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using TaskManager.Models;
+@model IEnumerable<TaskModel>
+
+<div id="tasks">
+    @using (Html.BeginForm("Index", "TaskEditor", FormMethod.Post, new { id = "userSelecet" }))
+    {
+        bool first = true;
+        foreach (var task in Model)
+        {
+            @Html.RadioButton("taskId", task.Guid, first)
+            @task.Title<br><div id="@task.Guid" hidden="hidden"><p> </p></div>
+            first = false;
+        }
+        if (first) {<h2>You have no tasks</h2> }
+        else {<input type="submit" value="Select" />}
+    }
+</div>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "ViewTask";
+}
+
+@using TaskManager.Models;
+@model TaskModel
+
+<div id="task">
+    <p>
+        @Html.DisplayNameFor(m => m.Title):<br>
+        @Html.TextBoxFor(m => m.Title, null ,new { @readonly = "readonly" })
+    </p>
+    <p>
+        @Html.DisplayNameFor(m => m.Description):<br>
+        @Html.TextAreaFor(m => m.Description,20,25, new { @readonly = "readonly" })
+    </p>
+</div>

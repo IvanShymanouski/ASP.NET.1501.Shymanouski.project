@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "DeleteTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<TaskManager.Models.TaskModel>
+
+<h2>EditTask</h2>
+
+
+    @using (Html.BeginForm("DeleteTask" , "TaskEditor", FormMethod.Post, new { id = "taskList"}))
+    {
+        bool first = true;
+        <b><p>List of tasks:</p></b>
+        foreach (var task in Model)
+        {
+            @Html.RadioButton("id", task.Guid, first)
+            <span>@task.Title</span> <br />
+            first = false;
+        }        
+        <br>        
+        <input type="submit" value="Delete" />
+    }

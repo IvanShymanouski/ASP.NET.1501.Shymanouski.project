@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.message</h2>
+
+@Html.ActionLink("Create task", "CreateTask", "TaskEditor")
+<br>
+@Html.ActionLink("Edit task", "EditTask", "TaskEditor")
+<br>
+@Html.ActionLink("Delete task", "DeleteTask", "TaskEditor")

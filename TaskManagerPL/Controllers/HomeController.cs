@@ -4,16 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TaskManagerPL.Models;
-using TaskManagerPL.Providers;
+//using TaskManagerPL.Providers;
 using BLL.Interfaces;
 
 namespace TaskManagerPL.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUserService service;
+        private readonly IService<UserEntity> service;
 
-        public HomeController(IUserService service)
+        public HomeController(IService<UserEntity> service)
         {
             this.service = service;
         }

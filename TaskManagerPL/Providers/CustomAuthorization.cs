@@ -8,9 +8,9 @@ using System.Security.Cryptography;
 using System.Web.WebPages;
 using Microsoft.Internal.Web.Utils;
 using TaskManagerPL.Models;
-using ORM;
 
-namespace TaskManagerPL.Providers
+
+/*namespace TaskManagerPL.Providers
 {
     public class CustomAuthorization : RoleProvider
     {
@@ -127,4 +127,4 @@ namespace TaskManagerPL.Providers
             throw new NotImplementedException();
         }
     }
-}
+}*/

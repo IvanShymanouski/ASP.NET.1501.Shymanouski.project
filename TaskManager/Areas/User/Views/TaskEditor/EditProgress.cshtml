@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "ViewTask";
+}
+
+@using TaskManager.Models;
+@model TaskUserModel
+
+<div id="task">
+    @using(Html.BeginForm())
+    {        
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.TaskId, new { hidden = "hidden", @readonly = "readonly" })
+        @Html.TextBoxFor(m => m.UserId, new { hidden = "hidden", @readonly = "readonly" })
+        <p>
+            @Html.DisplayNameFor(m => m.TaskTitle):<br>
+            @Html.TextBoxFor(m => m.TaskTitle, null ,new { @readonly = "readonly" })
+        </p>
+        <p>
+            @Html.DisplayNameFor(m => m.Progress):<br>
+            @Html.TextBoxFor(m => m.Progress)%
+        </p>
+        <input type="submit" value="edit">   
+    @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    }
+    }
+</div>

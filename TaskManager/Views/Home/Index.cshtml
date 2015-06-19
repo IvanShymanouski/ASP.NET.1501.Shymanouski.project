@@ -1,0 +1,16 @@
+﻿@using BLL.Interfaces;
+@model TaskManager.Models.RegisterModel
+
+<div>
+      @foreach (var i in (IEnumerable<RoleEntity>)ViewBag.All)
+        {
+                 <tr>
+                    <th>
+                        <b>Role Id:</b> @i.Id
+                    </th> 
+                    <th>
+                        <b>Role Name:</b> @i.Name
+                    </th> 
+                 </tr><br />
+        }
+</div>

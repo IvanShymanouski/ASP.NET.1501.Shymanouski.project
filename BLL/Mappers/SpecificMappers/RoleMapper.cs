@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.Interfaces;
 using DAL.Interfaces;
-using BLL.Interfaces;
 
 namespace BLL
 {
-    public class RoleMapper : IMapper<RoleEntity, RoleDal>
+    public class RoleMapper : IMapper<RoleDAL, RoleEntity>
     {
-        public RoleEntity ToBll(RoleDal role)
+        public RoleDAL ToDAL(RoleEntity role)
+        {
+            return new RoleDAL()
+            {
+                Id = role.Id,
+                Name = role.Name
+            };
+        }
+
+        public RoleEntity ToBLL(RoleDAL role)
         {
             return new RoleEntity()
             {
                 Id = role.Id,
-                Name = role.Name,
-            };
-        }
-
-        public RoleDal ToDal(RoleEntity role)
-        {
-            return new RoleDal()
-            {
-                Id = role.Id,
-                Name = role.Name,
+                Name = role.Name
             };
         }
     }

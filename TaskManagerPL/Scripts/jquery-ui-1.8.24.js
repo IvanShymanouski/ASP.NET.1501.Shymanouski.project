@@ -8773,7 +8773,7 @@ $.widget("ui.dialog", {
 		maxWidth: false,
 		minHeight: 150,
 		minWidth: 150,
-		modal: false,
+		moDAL: false,
 		position: {
 			my: 'center',
 			at: 'center',
@@ -8971,8 +8971,8 @@ $.widget("ui.dialog", {
 
 		$.ui.dialog.overlay.resize();
 
-		// adjust the maxZ to allow other modal dialogs to continue to work (see #4309)
-		if (self.options.modal) {
+		// adjust the maxZ to allow other moDAL dialogs to continue to work (see #4309)
+		if (self.options.moDAL) {
 			maxZ = 0;
 			$('.ui-dialog').each(function() {
 				if (this !== self.uiDialog[0]) {
@@ -8992,15 +8992,15 @@ $.widget("ui.dialog", {
 		return this._isOpen;
 	},
 
-	// the force parameter allows us to move modal dialogs to their correct
+	// the force parameter allows us to move moDAL dialogs to their correct
 	// position on open
 	moveToTop: function(force, event) {
 		var self = this,
 			options = self.options,
 			saveScroll;
 
-		if ((options.modal && !force) ||
-			(!options.stack && !options.modal)) {
+		if ((options.moDAL && !force) ||
+			(!options.stack && !options.moDAL)) {
 			return self._trigger('focus', event);
 		}
 
@@ -9030,14 +9030,14 @@ $.widget("ui.dialog", {
 			options = self.options,
 			uiDialog = self.uiDialog;
 
-		self.overlay = options.modal ? new $.ui.dialog.overlay(self) : null;
+		self.overlay = options.moDAL ? new $.ui.dialog.overlay(self) : null;
 		self._size();
 		self._position(options.position);
 		uiDialog.show(options.show);
 		self.moveToTop(true);
 
-		// prevent tabbing out of modal dialogs
-		if ( options.modal ) {
+		// prevent tabbing out of moDAL dialogs
+		if ( options.moDAL ) {
 			uiDialog.bind( "keydown.ui-dialog", function( event ) {
 				if ( event.keyCode !== $.ui.keyCode.TAB ) {
 					return;
@@ -9495,7 +9495,7 @@ $.extend($.ui.dialog.overlay, {
 
 		$el.remove();
 		
-		// adjust the maxZ to allow other modal dialogs to continue to work (see #4309)
+		// adjust the maxZ to allow other moDAL dialogs to continue to work (see #4309)
 		var maxZ = 0;
 		$.each(this.instances, function() {
 			maxZ = Math.max(maxZ, this.css('z-index'));

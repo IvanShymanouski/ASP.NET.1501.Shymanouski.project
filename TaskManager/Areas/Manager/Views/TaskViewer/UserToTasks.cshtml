@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "BoundUserToTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using TaskManager.Models;
+@model IEnumerable<TaskUserModel>
+
+@if (String.Empty == ViewBag.login)
+{
+    <div id="users">
+    @using (Html.BeginForm((string)ViewBag.GetFirst, "TaskViewer", FormMethod.Post, new { id = "userSelecet" }))
+    {
+        bool first = true;
+        foreach (var user in Model)
+        {
+            @Html.RadioButton("userId", user.UserId,first)
+            @user.UserLogin<br>
+            first = false;
+        }
+        if (first) {<h2>No users</h2> }
+        else {<input type="submit" value="Select" />}
+    }
+    </div>
+}
+else
+{    
+    <h2>task for @ViewBag.login:</h2>
+    using (Html.BeginForm((string)ViewBag.GetSecond, "TaskViewer", FormMethod.Post, new { id = "taskSelecet" }))
+    {
+        @Html.TextBox("userId", (Guid)ViewBag.userId, new { hidden =  "hidden"})
+        bool taskExist = false;        
+        foreach (var userTask in Model)
+        {           
+            @Html.CheckBox("Guid-"+userTask.TaskId.ToString())
+            @userTask.TaskTitle<br>
+            taskExist = true;
+        }
+       if (taskExist) 
+       {           
+           <input type="submit" value="Select"/> 
+       }
+       else { <h2>There are no tasks which do not belong to the user</h2> }
+    }
+
+}

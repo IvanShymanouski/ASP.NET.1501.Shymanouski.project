@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.Interfaces;
 using DAL.Interfaces;
-using BLL.Interfaces;
 
 namespace BLL
 {
-    public class UserMapper : IMapper<UserEntity, UserDal>
+    public class UserMapper : IMapper<UserDAL, UserEntity>
     {
-        public UserEntity ToBll(UserDal user)
+        public UserDAL ToDAL(UserEntity user)
         {
-            return new UserEntity()
+            return new UserDAL()
             {
                 Id = user.Id,
+                Login = user.Login,
                 Email = user.Email,
                 Password = user.Password,
                 RoleId = user.RoleId
             };
         }
 
-        public UserDal ToDal(UserEntity user)
+        public UserEntity ToBLL(UserDAL user)
         {
-            return new UserDal()
+            return new UserEntity()
             {
                 Id = user.Id,
+                Login = user.Login,
                 Email = user.Email,
                 Password = user.Password,
                 RoleId = user.RoleId

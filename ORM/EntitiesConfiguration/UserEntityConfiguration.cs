@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace ORM
 {
@@ -11,8 +6,9 @@ namespace ORM
     {
         public UserEntityConfiguration()
         {
-            // PK
-            this.HasKey<int>(u => u.Id);
+            this.HasKey(u => u.Id);
+
+            this.Property(u => u.Login).IsRequired();
 
             this.Property(u => u.Email).IsRequired();
 

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "UserTasks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TaskManager.Models;
+@model IEnumerable<TaskUserModel>
+
+@if (String.Empty == ViewBag.login)
+{
+    <div id="users">
+    @using(Html.BeginForm("UserTasks","TaskViewer",FormMethod.Post,new { id = "userSelecet"})){
+        bool first = true;
+        foreach (var user in Model)
+        {
+            @Html.RadioButton("userId", user.UserId,first)
+            @user.UserLogin<br>
+            first = false;
+        }
+        if (first) {<h2>No users</h2> }
+        else {<input type="submit" value="Select" />}
+    }
+    </div>
+}
+else
+{    
+    <h2>@ViewBag.login tasks:</h2>
+    <table border="1">
+    <tr>
+        <th>Title</th>
+        <th>Progress</th>
+     </tr>
+    @foreach (var userTask in Model)
+    {<tr>        
+            <td>@userTask.TaskTitle</td>
+            <td>@userTask.Progress%</td>
+     </tr>
+    }
+    </table>
+}

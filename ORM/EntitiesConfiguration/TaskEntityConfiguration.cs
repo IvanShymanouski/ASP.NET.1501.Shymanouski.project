@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace ORM
 {
@@ -11,13 +6,11 @@ namespace ORM
     {
         public TaskEntityConfiguration()
         {
-            this.HasKey<int>(t => t.Id);
+            this.HasKey(u => u.Id);
 
-            this.Property(t => t.Title).IsRequired(); 
+            this.Property(t => t.Title).IsRequired();
 
             this.Property(t => t.Description).IsRequired();
-
-            this.Property(t => t.Progress).IsRequired();
         }
     }
 }

@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-using EntityBase;
 
 namespace ORM
 {
-    [Table("Task")]
-    public class Task : IEntity
+    public class Task : IORMHasIdEntity
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }        
         public string Description { get; set; }
-        public int Progress { get; set; } 
 
+        public virtual ICollection<TaskUserRelation> TaskUserRelation { get; set; }
+        public Task()
+        {
+            TaskUserRelation = new HashSet<TaskUserRelation>();
+        }
     }
-
 }

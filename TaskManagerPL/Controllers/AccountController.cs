@@ -3,7 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using TaskManagerPL.Models;
-using TaskManagerPL.Providers;
+//using TaskManagerPL.Providers;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using BLL.Interfaces;
@@ -13,10 +13,10 @@ namespace TaskManagerPL.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IUserService userService;
-        private readonly IRoleService roleService;
+        private readonly IHasIdService<UserEntity> userService;
+        private readonly IHasIdService<RoleEntity> roleService;
 
-        public AccountController(IRoleService roleService, IUserService userService)
+        public AccountController(IHasIdService<RoleEntity> roleService, IHasIdService<UserEntity> userService)
         {
             this.roleService = roleService;
             this.userService = userService;
@@ -88,9 +88,9 @@ namespace TaskManagerPL.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
-                MembershipUser membershipUser =
+               MembershipUser membershipUser =
                     ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Email, model.Password);
                 if (membershipUser != null)
                 {
@@ -101,7 +101,7 @@ namespace TaskManagerPL.Controllers
                 {
                     ModelState.AddModelError("", "Registration error");
                 }
-            }
+            }*/
 
             // If we got this far, something failed, redisplay form
             return View(model);

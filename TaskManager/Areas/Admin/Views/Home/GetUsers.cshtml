@@ -1,0 +1,10 @@
+﻿@model ICollection<TaskManager.Areas.Admin.Models.UserModel>
+
+@foreach (var user in Model)
+{
+          <tr>
+          <th>
+            @Html.DisplayForModel(user);
+          </th> 
+          </tr>
+}

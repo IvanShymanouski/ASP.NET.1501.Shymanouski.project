@@ -30,14 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="AutoMapper.Net4, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -49,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -57,32 +50,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Concrete\BaseRepository.cs" />
-    <Compile Include="Concrete\SpecificConcrete\RoleRepository.cs" />
-    <Compile Include="Concrete\SpecificConcrete\TaskRepository.cs" />
-    <Compile Include="Concrete\SpecificConcrete\UserRepository.cs" />
-    <Compile Include="Concrete\UnitOfWork.cs" />
-    <Compile Include="Mappres\IMapper.cs" />
-    <Compile Include="Mappres\SpecificMappers\RoleMapper.cs" />
-    <Compile Include="Mappres\SpecificMappers\TaskMapper.cs" />
-    <Compile Include="Mappres\SpecificMappers\UserMapper.cs" />
+    <Compile Include="Interfaces\Entities\IDALHasIdEntity.cs" />
+    <Compile Include="Interfaces\Repositories\IHasIdRepository.cs" />
+    <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\HasIdRepository.cs" />
+    <Compile Include="Repository\TaskUserRepository.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+    <Compile Include="Interfaces\Entities\IDALEntity.cs" />
+    <Compile Include="Interfaces\Entities\TaskUserRelationDAL.cs" />
+    <Compile Include="Interfaces\Entities\RoleDAL.cs" />
+    <Compile Include="Interfaces\Entities\TaskDAL.cs" />
+    <Compile Include="Interfaces\Entities\UserDAL.cs" />
+    <Compile Include="Interfaces\Repositories\ITaskUserRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUnitOfWork.cs" />
+    <Compile Include="Mappres\IMapperDAL.cs" />
+    <Compile Include="Mappres\SpecificMappers\TaskUserRelationMapperDAL.cs" />
+    <Compile Include="Mappres\SpecificMappers\RoleMapperDAL.cs" />
+    <Compile Include="Mappres\SpecificMappers\TaskMapperDAL.cs" />
+    <Compile Include="Mappres\SpecificMappers\UserMapperDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL.Interfaces\DAL.Interfaces.csproj">
-      <Project>{16be62f7-7e61-4c60-a290-fadfd0a7c234}</Project>
-      <Name>DAL.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EntityBase\EntityBase.csproj">
-      <Project>{1721d0d7-8b5c-4db8-b6e0-bd907c65455e}</Project>
-      <Name>EntityBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
       <Project>{3eb399e7-87d4-4b17-a48b-7069d92457fa}</Project>
       <Name>ORM</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

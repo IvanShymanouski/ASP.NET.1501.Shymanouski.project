@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "EditTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript"
+   src="@Url.Content("~/Scripts/Manager/EditAjax.js")">
+</script>
+
+@using TaskManager.Models
+@model TaskModel
+
+<div id="taskSelector">
+@using (Html.BeginForm("GetTask", "TaskEditor", FormMethod.Post, new{ id="taskSelect" }))
+{
+    bool first = true;
+    <b><p>Select task by title:</p></b>
+    foreach (var task in (List<TaskModel>)ViewBag.tasks)
+    {
+        @Html.RadioButton("taskId", task.Guid, first)
+        <span>@task.Title</span> <br />
+        first = false;
+    }
+    <br>
+    <input type="submit" value="Select" />
+}
+</div>
+<div id="editor" hidden>
+@using (Html.BeginForm("EditTask","TaskEditor",FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Enter task below</legend>
+        <div id ="TaskEditor">
+        </div>
+        <input type="submit" value="Task" />
+    </fieldset>
+}
+</div>

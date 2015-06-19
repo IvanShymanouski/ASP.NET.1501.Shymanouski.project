@@ -326,7 +326,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -368,25 +370,14 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL.Interfaces\BLL.Interfaces.csproj">
-      <Project>{053627e2-ffef-4fb7-95a9-cf040e60740b}</Project>
-      <Name>BLL.Interfaces</Name>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{07f4b088-2cbe-469d-9828-10178962196d}</Project>
+      <Name>BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
       <Project>{a0916bf7-9ad0-4f5d-99c3-62cffa3ca65d}</Project>
       <Name>DependencyResolver</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EntityBase\EntityBase.csproj">
-      <Project>{1721d0d7-8b5c-4db8-b6e0-bd907c65455e}</Project>
-      <Name>EntityBase</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ORM\ORM.csproj">
-      <Project>{3eb399e7-87d4-4b17-a48b-7069d92457fa}</Project>
-      <Name>ORM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
