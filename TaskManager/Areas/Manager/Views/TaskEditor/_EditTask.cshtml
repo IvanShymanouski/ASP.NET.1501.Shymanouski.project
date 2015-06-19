@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "EditTask";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model TaskManager.Models.TaskModel
+
+@using (Html.BeginForm("EditTask","TaskEditor",FormMethod.Post)) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <fieldset>
+        <legend>Enter task below</legend>
+           @Html.TextBoxFor(m => m.Guid, new { hidden = "hidden"})
+        <p>
+           @Html.LabelFor(m => m.Title)<br>
+           @Html.TextBoxFor(m => m.Title)
+        </p>
+        <p>
+           @Html.LabelFor(m => m.Description)<br>
+           @Html.TextAreaFor(m => m.Description)
+        </p>
+        <input type="submit" value="Task" />
+    </fieldset>
+}
