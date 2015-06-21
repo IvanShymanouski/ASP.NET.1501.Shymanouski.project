@@ -1,40 +1,16 @@
 ﻿@{
-    ViewBag.Title = "User roles manipulations";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<script type="text/javascript"
-   src="@Url.Content("~/scripts/Admin/JsonGetterPutAjax.js")">
-</script>
-
-<b><p>What action?</p></b>
-@Html.RadioButton("deleteOrChange", "change", true)
-<span>Change role</span> <br />
-@Html.RadioButton("deleteOrChange", "delete", false)
-<span>Delete user</span> <br />
-
-<b><p>Role to user search:</p></b>
-
-@foreach(var role in (string[])ViewBag.roles)
-{
-    @Html.RadioButton("roles", role)
-    <span>@role</span> <br />
+    ViewBag.Title = "Role manipulation";
 }
 
-<div>
-  <b><p id="SelectedRole"></p></b>
-  <p id="JsonGetter"></p>
-</div>
- 
-<div id="selectReplace" hidden>
-    <div id ="ChsRoleForRepl">
-        <b><p>Choose role for replace:</p></b>
-        @foreach(var role in (string[])ViewBag.roles)
-        {
-            @Html.RadioButton("replace", role)
-            <span>@role</span> <br />
-        }
-        
-        <br>
-    </div>
-    <a href="index" id="replaceLink">Change role</a>
-</div>
+@section navigation{
+    @Html.ActionLink("Back", "Index", "Home", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+}    
+
+<b>@ViewBag.message</b><br>
+
+@Html.ActionLink("See account roles", "SeeUserRoles")
+<br>
+@Html.ActionLink("Add account to roles", "AddUserToRoles")
+<br>
+@Html.ActionLink("Delete account from roles", "DeleteUserFromRoles")

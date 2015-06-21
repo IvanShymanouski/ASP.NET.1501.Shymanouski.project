@@ -24,7 +24,7 @@ namespace DAL
         public virtual IEnumerable<TDALEntity> GetAll()
         {
             Func<TEntity, TDALEntity> f = (obj) => _entityMapper.ToDAL(obj);            
-            return _context.Set<TEntity>().AsNoTracking().Select(f);
+           return _context.Set<TEntity>().AsNoTracking().Select(f);
         }
 
         public virtual void Create(TDALEntity entity)

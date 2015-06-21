@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BLL.Interfaces
+﻿namespace BLL.Interfaces
 {
     public interface IBLLEntity
     {

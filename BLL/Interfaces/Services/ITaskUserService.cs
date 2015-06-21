@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BLL.Interfaces
 {
-    public interface ITaskUserService : IService<TaskUserRelationEntity>
+    public interface ITaskUserService : IService<TaskUserEntity>
     {
-        IEnumerable<TaskUserRelationEntity> GetByUserId(Guid userId);
-        IEnumerable<TaskUserRelationEntity> GetByTaskId(Guid taskId);
+        IEnumerable<TaskUserEntity> GetByUserId(Guid userId);
+        IEnumerable<TaskUserEntity> GetByTaskId(Guid taskId);
     }
 }

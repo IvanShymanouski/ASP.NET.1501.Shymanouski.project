@@ -1,14 +1,12 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        Hello, <b>@User.Identity.Name</b>!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        Hello, <b>@User.Identity.Name</b>!       
+    </text>
+      using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", style = "display : inline" })) {
             @Html.AntiForgeryToken()
             <input type="submit" value="Log Off"/>
         }
-    </text>
-} else {
-    <ul>
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+} else {    
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })<br>
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
 }

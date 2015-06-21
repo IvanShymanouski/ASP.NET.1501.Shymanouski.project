@@ -47,26 +47,25 @@ namespace TaskManager.Areas.User.Controllers
         private IEnumerable<TaskModel> GetTasks()
         {
             UserEntity user = userService.Find(x => x.Login == User.Identity.Name);
-            IEnumerable<TaskUserRelationEntity> taskUser = taskUserService.GetByUserId(user.Id);
+            IEnumerable<TaskUserEntity> taskUser = taskUserService.GetByUserId(user.Id);
             IEnumerable<TaskEntity> tasks = taskService.GetAll().Where(x => IsItUserTask(taskUser,x.Id));
             List<TaskModel> taskList = new List<TaskModel>(0);
             foreach (var task in tasks) taskList.Add(TaskMapper.ToModel(task));
             return taskList;
         }
 
-        private bool IsItUserTask(IEnumerable<TaskUserRelationEntity> taskUsers, Guid taskId)
+        private bool IsItUserTask(IEnumerable<TaskUserEntity> taskUsers, Guid taskId)
         {
-            var tasks = taskUsers.Where(x => x.TaskId == taskId);
-
             bool itIs = false;
 
+            var tasks = taskUsers.Where(x => x.TaskId == taskId);
             foreach (var t in tasks)
             {
                 itIs = true; break;
             }
 
             return itIs;
-        }        
+        }               
 
     }
 }

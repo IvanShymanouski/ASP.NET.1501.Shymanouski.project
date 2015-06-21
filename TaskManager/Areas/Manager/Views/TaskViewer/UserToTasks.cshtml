@@ -1,7 +1,7 @@
-﻿@{
-    ViewBag.Title = "BoundUserToTasks";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskViewer", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
 
 @using TaskManager.Models;
 @model IEnumerable<TaskUserModel>
@@ -31,8 +31,8 @@ else
         @Html.TextBox("userId", (Guid)ViewBag.userId, new { hidden =  "hidden"})
         bool taskExist = false;        
         foreach (var userTask in Model)
-        {           
-            @Html.CheckBox("Guid-"+userTask.TaskId.ToString())
+        {                       
+           <input name="tasks" type="checkbox" value="@userTask.TaskId" />
             @userTask.TaskTitle<br>
             taskExist = true;
         }
@@ -40,7 +40,7 @@ else
        {           
            <input type="submit" value="Select"/> 
        }
-       else { <h2>There are no tasks which do not belong to the user</h2> }
+       else { <h2>@ViewBag.message</h2> }
     }
 
 }

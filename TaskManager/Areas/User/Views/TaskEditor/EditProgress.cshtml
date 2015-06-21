@@ -1,13 +1,18 @@
 ﻿@{
-    ViewBag.Title = "ViewTask";
+    ViewBag.Title = "Edit task";
 }
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskEditor", null, new { style = "margin-right : 20px" })
+    @Html.Partial("_Navigation")
+} 
 
 @using TaskManager.Models;
 @model TaskUserModel
 
 <div id="task">
     @using(Html.BeginForm())
-    {        
+    {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary()
         @Html.TextBoxFor(m => m.TaskId, new { hidden = "hidden", @readonly = "readonly" })
@@ -20,9 +25,10 @@
             @Html.DisplayNameFor(m => m.Progress):<br>
             @Html.TextBoxFor(m => m.Progress)%
         </p>
-        <input type="submit" value="edit">   
-    @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    }
+        <input type="submit" value="Edit">
     }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

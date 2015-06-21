@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Security;
 using System.Web.Helpers;
 using BLL.Interfaces;
-using BLL;
-using TaskManager.Infrastructure;
 
 namespace TaskManager.Providers
 {
@@ -40,8 +37,7 @@ namespace TaskManager.Providers
                                 Id = Guid.NewGuid(),
                                 Login = login,
                                 Email = email,
-                                Password = Crypto.HashPassword(password),
-                                RoleId = RoleKeysNames.keys[0]
+                                Password = Crypto.HashPassword(password)
                             };
                 users.Add(user);
                 membershipUser = GetUser(email);
@@ -67,6 +63,7 @@ namespace TaskManager.Providers
             return GetUser(email);
         }
 
+        #region NotImplemented
         public override string ApplicationName
         {
             get
@@ -179,6 +176,7 @@ namespace TaskManager.Providers
         {
             throw new NotImplementedException();
         }
+        #endregion
 
         private UserEntity FindUser(string login, string email)
         {

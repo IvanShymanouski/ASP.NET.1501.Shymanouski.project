@@ -6,28 +6,22 @@
         <link href="~/Icon.png" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Scripts.Render("~/bundles/jquery")
-        @Styles.Render("~/Content/css")
+        <!--@Styles.Render("~/Content/css")-->
         @Scripts.Render("~/Content/js")
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-right">
-                    <section id="login">
+        <header>            
+                <div style="height : 30px">
+                    <nav style="display:inline">
+                        @RenderSection("navigation", required: true)
+                    </nav>
+                    <section id="login" style="display : inline; position:absolute; right : 15px">
                         @Html.Partial("_LoginPartial")
                     </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+                </div>            
         </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
+        <div id="body">            
             <section class="content-wrapper main-content clear-fix">
                 @RenderBody()
             </section>

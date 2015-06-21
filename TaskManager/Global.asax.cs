@@ -6,7 +6,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using TaskManager.Infrastructure;
 
 namespace TaskManager
 {
@@ -19,9 +18,7 @@ namespace TaskManager
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            System.Web.Mvc.DependencyResolver.SetResolver(new NinjectDependencyResolver());            
+            BundleConfig.RegisterBundles(BundleTable.Bundles);                        
         }
     }
 }

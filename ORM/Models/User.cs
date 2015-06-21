@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ORM
 {
@@ -10,14 +9,13 @@ namespace ORM
         public string Email { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        
-        public Guid RoleId { get; set; }
-        public virtual Role Role { get; set; }
 
-        public virtual ICollection<TaskUserRelation> TaskUserRelation { get; set; }
+        public virtual ICollection<RoleUser> Roles { get; set; }
+        public virtual ICollection<TaskUser> Tasks { get; set; }
         public User()
         {
-            TaskUserRelation = new HashSet<TaskUserRelation>();
+            Roles = new HashSet<RoleUser>();
+            Tasks = new HashSet<TaskUser>();
         }
     }
 }

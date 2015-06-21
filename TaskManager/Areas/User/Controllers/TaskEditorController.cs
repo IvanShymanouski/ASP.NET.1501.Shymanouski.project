@@ -25,23 +25,28 @@ namespace TaskManager.Areas.User.Controllers
 
         public ActionResult Index(string message = "")
         {
+            ViewBag.message = message;
             return View(GetTasks());
         }
 
         [HttpPost]
         public ActionResult Index(Guid taskId)
         {
+            ActionResult restult;
+
             UserEntity user = userService.Find(x => x.Login == User.Identity.Name);
-            TaskUserRelationEntity taskUser = taskUserService.Find(x => x.TaskId == taskId && x.UserId == user.Id);
+            TaskUserEntity taskUser = taskUserService.Find(x => x.TaskId == taskId && x.UserId == user.Id);
             if (Request.IsAjaxRequest())
             {
-                return Json(taskUser.Progress);
+                restult = Json(taskUser.Progress);
             }
             else
             {
                 TaskEntity task = taskService.GetById(taskId);
-                return RedirectToAction("EditProgress", TaskUserMapper.ToModel(task, taskUser.Progress));
+                restult = RedirectToAction("EditProgress", TaskUserMapper.ToModel(task, taskUser.Progress));
             }
+
+            return restult;
         }
 
         public ActionResult EditProgress(TaskUserModel task)
@@ -59,10 +64,10 @@ namespace TaskManager.Areas.User.Controllers
                 if (task.Progress <= 100 && task.Progress >= 0)
                 {
                     UserEntity user = userService.Find(x => x.Login == User.Identity.Name);
-                    TaskUserRelationEntity tue = taskUserService.Find(x => x.TaskId == task.TaskId && x.UserId == user.Id);
+                    TaskUserEntity tue = taskUserService.Find(x => x.TaskId == task.TaskId && x.UserId == user.Id);
                     tue.Progress = task.Progress;
                     taskUserService.Edit(tue);
-                    result = RedirectToAction("Index", "Home", new { message = "Progress updated" });
+                    result = RedirectToAction("Index", "Home", new { message = "Progress of task "+task.TaskTitle+" updated" });
                 }
                 else
                 {
@@ -76,19 +81,18 @@ namespace TaskManager.Areas.User.Controllers
         private IEnumerable<TaskModel> GetTasks()
         {
             UserEntity user = userService.Find(x => x.Login == User.Identity.Name);
-            IEnumerable<TaskUserRelationEntity> taskUser = taskUserService.GetByUserId(user.Id);
+            IEnumerable<TaskUserEntity> taskUser = taskUserService.GetByUserId(user.Id);
             IEnumerable<TaskEntity> tasks = taskService.GetAll().Where(x => IsItUserTask(taskUser, x.Id));
             List<TaskModel> taskList = new List<TaskModel>(0);
             foreach (var task in tasks) taskList.Add(TaskMapper.ToModel(task));
             return taskList;
         }
 
-        private bool IsItUserTask(IEnumerable<TaskUserRelationEntity> taskUsers, Guid taskId)
+        private bool IsItUserTask(IEnumerable<TaskUserEntity> taskUsers, Guid taskId)
         {
-            var tasks = taskUsers.Where(x => x.TaskId == taskId);
-
             bool itIs = false;
 
+            var tasks = taskUsers.Where(x => x.TaskId == taskId);
             foreach (var t in tasks)
             {
                 itIs = true; break;

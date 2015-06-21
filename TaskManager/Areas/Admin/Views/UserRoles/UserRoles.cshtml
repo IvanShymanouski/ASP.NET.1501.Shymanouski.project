@@ -1,0 +1,70 @@
+﻿@using TaskManager.Models;
+@model IEnumerable<string>
+
+<script type="text/javascript"
+   src="@Url.Content("~/Scripts/Admin/GetUsersOrRolesAjax.js")">    
+</script>
+<script type="text/javascript">
+    var actionName = '@ViewBag.actionName';
+    var accountMessage = '@ViewBag.messsage';
+</script>
+<script type="text/javascript"
+   src="@Url.Content("~/Scripts/Admin/UserRoles.js")">
+</script>
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "UserRoles", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+}
+
+@if (null==Model)
+{
+    using (Html.BeginForm((string)ViewBag.GetRolesAction, "UserRoles", FormMethod.Post, new { id = "selectUser" }))
+    {
+        @Html.AntiForgeryToken()
+        <b>@ViewBag.message</b><br>
+    
+        <br><b>Enter Login of account you want:</b>
+        @Html.TextBox("userLogin", null, new { id = "searchName" })
+        <input type="submit" value="Enter">
+        <div id="users" hidden="hidden">
+            First <span></span> mathces:<br>
+            <ul>
+            </ul>
+        </div>
+    }
+    <div id="roleinfo">
+     <b></b>
+     <div id="roles" hidden="hidden">
+     @using (Html.BeginForm((string)ViewBag.ApplyAction, "UserRoles", FormMethod.Post))
+     {
+         @Html.AntiForgeryToken()
+         @Html.TextBox("userLogin", (string)ViewBag.login, new { hidden = "hidden"})
+         <div id="rolesToUser">
+         </div>
+         <input type="submit" value="Select">
+     }
+     </div>
+    </div>
+}
+else
+{   
+    <b>Roles for @ViewBag.login:</b>
+    using (Html.BeginForm((string)ViewBag.ApplyAction, "UserRoles", FormMethod.Post))
+    {
+       @Html.AntiForgeryToken()
+       bool roleExist = false;
+       @Html.TextBox("userLogin", (string)ViewBag.login, new { hidden = "hidden"})
+       foreach (var role in Model)
+       {           
+          <input name="roles" type="checkbox" value="@role" />
+          @role<br>;
+          roleExist = true;
+       }
+       if (roleExist) 
+       {           
+           <input type="submit" value="select"/> 
+       }
+       else { <h2>@ViewBag.messsage</h2> }
+    }
+}

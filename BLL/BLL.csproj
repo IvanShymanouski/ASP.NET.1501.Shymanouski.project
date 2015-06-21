@@ -56,22 +56,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\Entities\RoleUserEntity.cs" />
     <Compile Include="Interfaces\Entities\IBLLEntity.cs" />
-    <Compile Include="Interfaces\Entities\TaskUserRelationEntity.cs" />
+    <Compile Include="Interfaces\Entities\TaskUserEntity.cs" />
     <Compile Include="Interfaces\Entities\IBLLHasIdEntity.cs" />
     <Compile Include="Interfaces\Entities\RoleEntity.cs" />
     <Compile Include="Interfaces\Entities\TaskEntity.cs" />
     <Compile Include="Interfaces\Entities\UserEntity.cs" />
+    <Compile Include="Interfaces\Services\IRoleUserService.cs" />
     <Compile Include="Interfaces\Services\IService.cs" />
     <Compile Include="Interfaces\Services\IHasIdService.cs" />
     <Compile Include="Interfaces\Services\ITaskUserService.cs" />
     <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Mappers\SpecificMappers\RoleUserMapper.cs" />
     <Compile Include="Mappers\SpecificMappers\RoleMapper.cs" />
     <Compile Include="Mappers\SpecificMappers\TaskMapper.cs" />
-    <Compile Include="Mappers\SpecificMappers\TaskUserRelationMapper.cs" />
+    <Compile Include="Mappers\SpecificMappers\TaskUserMapper.cs" />
     <Compile Include="Mappers\SpecificMappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\RoleUserService.cs" />
     <Compile Include="Services\HasIdService.cs" />
     <Compile Include="Services\TaskUserService.cs" />
   </ItemGroup>

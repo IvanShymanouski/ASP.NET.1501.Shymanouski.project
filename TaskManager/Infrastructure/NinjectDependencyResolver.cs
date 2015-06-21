@@ -11,11 +11,12 @@ namespace TaskManager.Infrastructure
 {
     public class NinjectDependencyResolver : IDependencyResolver
     {
-        private readonly IKernel _kernel;
+        private IKernel _kernel;
 
-        public NinjectDependencyResolver()
+        public NinjectDependencyResolver(IKernel kernel)
         {
-            _kernel = new StandardKernel(new ResolverModule());
+            _kernel = kernel;
+            _kernel.ConfigurateResolver();
         }
 
         public object GetService(Type serviceType)

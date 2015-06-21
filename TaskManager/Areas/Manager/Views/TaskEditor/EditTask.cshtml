@@ -1,10 +1,14 @@
 ﻿@{
     ViewBag.Title = "EditTask";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript"
    src="@Url.Content("~/Scripts/Manager/EditAjax.js")">
 </script>
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskEditor", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
 
 @using TaskManager.Models
 @model TaskModel
@@ -21,18 +25,19 @@
         first = false;
     }
     <br>
-    <input type="submit" value="Select" />
+    if (first) {<b>Have no tasks</b> }
+    else {<input type="submit" value="Select" />}
 }
 </div>
 <div id="editor" hidden>
 @using (Html.BeginForm("EditTask","TaskEditor",FormMethod.Post)) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    <fieldset>
+    <fieldset style="display : inline">
         <legend>Enter task below</legend>
         <div id ="TaskEditor">
         </div>
-        <input type="submit" value="Task" />
+        <input type="submit" value="Edit" />
     </fieldset>
 }
 </div>

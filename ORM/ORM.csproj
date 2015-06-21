@@ -48,15 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntitiesConfiguration\TaskUserRelationEntityConfiguration.cs" />
+    <Compile Include="EntitiesConfiguration\RoleUserEntityConfiguration.cs" />
+    <Compile Include="EntitiesConfiguration\TaskUserEntityConfiguration.cs" />
     <Compile Include="EntitiesConfiguration\RoleEntityConfiguration.cs" />
     <Compile Include="EntitiesConfiguration\TaskEntityConfiguration.cs" />
     <Compile Include="EntitiesConfiguration\UserEntityConfiguration.cs" />
     <Compile Include="EntityModel.cs" />
     <Compile Include="Initialize\InitializeEntityModel.cs" />
+    <Compile Include="Models\RoleUser.cs" />
     <Compile Include="Models\IORMHasIdEtity.cs" />
     <Compile Include="Models\IORMEtity.cs" />
-    <Compile Include="Models\TaskUserRelation.cs" />
+    <Compile Include="Models\TaskUser.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />

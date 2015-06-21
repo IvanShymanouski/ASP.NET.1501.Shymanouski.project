@@ -1,6 +1,10 @@
 ﻿@using BLL.Interfaces;
 @model TaskManager.Models.RegisterModel
 
+@section navigation{
+    @Html.Partial("_Navigation")
+}
+
 <div>
       @foreach (var i in (IEnumerable<RoleEntity>)ViewBag.All)
         {

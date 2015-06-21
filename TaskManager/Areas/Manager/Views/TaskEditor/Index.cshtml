@@ -1,7 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Task editor";
 }
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "Home", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
 
 <h2>@ViewBag.message</h2>
 

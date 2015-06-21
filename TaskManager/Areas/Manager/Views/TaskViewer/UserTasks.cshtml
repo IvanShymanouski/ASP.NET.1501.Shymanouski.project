@@ -1,7 +1,12 @@
 ﻿@{
     ViewBag.Title = "UserTasks";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskViewer", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
+
 @using TaskManager.Models;
 @model IEnumerable<TaskUserModel>
 

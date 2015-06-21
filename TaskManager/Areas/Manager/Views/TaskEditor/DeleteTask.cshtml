@@ -1,23 +1,25 @@
 ﻿@{
     ViewBag.Title = "DeleteTask";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model IEnumerable<TaskManager.Models.TaskModel>
 
-<h2>EditTask</h2>
+@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskEditor", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+}
 
-
-    @using (Html.BeginForm("DeleteTask" , "TaskEditor", FormMethod.Post, new { id = "taskList"}))
+@using (Html.BeginForm("DeleteTask" , "TaskEditor", FormMethod.Post, new { id = "taskList"}))
+{
+    bool first = true;
+    <b><p>List of tasks:</p></b>
+    foreach (var task in Model)
     {
-        bool first = true;
-        <b><p>List of tasks:</p></b>
-        foreach (var task in Model)
-        {
-            @Html.RadioButton("id", task.Guid, first)
-            <span>@task.Title</span> <br />
-            first = false;
-        }        
-        <br>        
-        <input type="submit" value="Delete" />
-    }
+        @Html.RadioButton("id", task.Guid, first)
+        <span>@task.Title</span> <br />
+        first = false;
+    }        
+    <br>
+    if (first) {<b>Have no tasks</b> }
+    else {<input type="submit" value="Delete task" />}
+}

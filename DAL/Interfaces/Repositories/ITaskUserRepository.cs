@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace DAL.Interfaces
 {
-    public interface ITaskUserRepository : IRepository<TaskUserRelationDAL>
+    public interface ITaskUserRepository : IRepository<TaskUserDAL>
     {
-        IEnumerable<TaskUserRelationDAL> GetByUserId(Guid userId);
-        IEnumerable<TaskUserRelationDAL> GetByTaskId(Guid taskId);        
+        IEnumerable<TaskUserDAL> GetByUserId(Guid userId);
+        IEnumerable<TaskUserDAL> GetByTaskId(Guid taskId);
     }
 }

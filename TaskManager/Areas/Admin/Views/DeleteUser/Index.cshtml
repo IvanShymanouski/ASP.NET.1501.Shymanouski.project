@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Delete account";
+}
+<script type="text/javascript"
+   src="@Url.Content("~/Scripts/Admin/GetUsersOrRolesAjax.js")">
+</script>
+<script type="text/javascript"
+   src="@Url.Content("~/Scripts/Admin/DeleteUser.js")">
+</script>
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "Home", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <b>@ViewBag.message</b><br>
+    
+    <b>Display accounts of role:</b>    
+    <select name="role">
+    @foreach (var role in (string[])ViewBag.roles)
+    {
+        <option value="@role">@role</option>        
+    }
+    </select>    
+    <br><b>Enter Login of account you want : </b>
+    @Html.TextBox("userLogin", null, new { id = "searchName" })
+    <input id="selectRole" type="submit" value="Delete account">
+    <div id="users" hidden="hidden">
+        First <span></span> mathces:<br>
+        <ul>
+        </ul>
+    </div>
+}

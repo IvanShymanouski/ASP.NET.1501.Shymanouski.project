@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TaskManager.Infrastructure;
-using BLL.Interfaces;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
@@ -18,12 +13,12 @@ namespace TaskManager.Areas.Manager.Controllers
 
         public ActionResult About()
         {
-            return RedirectToAction("About", "Home", new { area = ""});
+            return View();
         }
 
         public ActionResult Contact()
         {
-            return RedirectToAction("Contact", "Home", new { area = "" });
+            return View();
         }
     }
 }

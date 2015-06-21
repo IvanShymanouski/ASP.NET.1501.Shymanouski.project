@@ -12,8 +12,7 @@ namespace BLL
                 Id = user.Id,
                 Login = user.Login,
                 Email = user.Email,
-                Password = user.Password,
-                RoleId = user.RoleId
+                Password = user.Password
             };
         }
 
@@ -24,8 +23,7 @@ namespace BLL
                 Id = user.Id,
                 Login = user.Login,
                 Email = user.Email,
-                Password = user.Password,
-                RoleId = user.RoleId
+                Password = user.Password
             };
         }
     }

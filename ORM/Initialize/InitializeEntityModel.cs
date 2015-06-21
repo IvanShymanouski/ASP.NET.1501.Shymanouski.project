@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data.Entity;
-using System.Xml;
-using System.IO;
+﻿using System.Data.Entity;
 
 namespace ORM
 {
@@ -11,7 +8,7 @@ namespace ORM
 
         protected override void Seed(EntityModel context)
         {
-            base.Seed(context);
+            base.Seed(context);            
         }
     }
 }

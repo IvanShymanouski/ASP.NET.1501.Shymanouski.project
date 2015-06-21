@@ -11,19 +11,20 @@ namespace TaskManager.Areas.User.Controllers
     [Authorize(Roles = RoleKeysNames.roleUser)]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string message = "")
         {
+            ViewBag.message = message;
             return View();
         }
 
         public ActionResult About()
         {
-            return RedirectToAction("About", "Home", new { area = "" });
+            return View();
         }
 
         public ActionResult Contact()
         {
-            return RedirectToAction("Contact", "Home", new { area = "" });
+            return View();
         }
     }
 }

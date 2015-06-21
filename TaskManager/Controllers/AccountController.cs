@@ -10,15 +10,6 @@ namespace TaskManager.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly IHasIdService<UserEntity> userService;
-        private readonly IHasIdService<RoleEntity> roleService;
-
-        public AccountController(IHasIdService<RoleEntity> roleService, IHasIdService<UserEntity> userService)
-        {
-            this.roleService = roleService;
-            this.userService = userService;
-        }
-
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -37,9 +28,7 @@ namespace TaskManager.Controllers
                 if (null != user)
                 {
                     FormsAuthentication.SetAuthCookie(user.Login, model.RememberMe);
-                    int ind =0;
-                    while (user.RoleId != RoleKeysNames.keys[ind]) ind++;
-                    result = RedirectToAction("Index", "Home", new { area = RoleKeysNames.names[ind] });
+                    result = RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -75,6 +64,7 @@ namespace TaskManager.Controllers
             {
                 if (null != ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Login, model.Email, model.Password))
                 {
+                    (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeysNames.roleUser });
                     FormsAuthentication.SetAuthCookie(model.Login, false);
                     result = RedirectToAction("Index", "Home", new { area = RoleKeysNames.roleUser });
                 }

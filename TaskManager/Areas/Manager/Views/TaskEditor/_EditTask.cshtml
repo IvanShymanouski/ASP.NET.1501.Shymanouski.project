@@ -1,13 +1,17 @@
 ﻿@{
     ViewBag.Title = "EditTask";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model TaskManager.Models.TaskModel
+
+@section navigation{
+    @Html.ActionLink("Back", "EditTask", "TaskEditor", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
 
 @using (Html.BeginForm("EditTask","TaskEditor",FormMethod.Post)) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-    <fieldset>
+    <fieldset style="display : inline">
         <legend>Enter task below</legend>
            @Html.TextBoxFor(m => m.Guid, new { hidden = "hidden"})
         <p>
@@ -18,6 +22,6 @@
            @Html.LabelFor(m => m.Description)<br>
            @Html.TextAreaFor(m => m.Description)
         </p>
-        <input type="submit" value="Task" />
+        <input type="submit" value="Edit" />
     </fieldset>
 }

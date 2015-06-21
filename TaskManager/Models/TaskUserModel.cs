@@ -25,9 +25,9 @@ namespace TaskManager.Models
 
     public static class TaskUserMapper
     {
-        public static TaskUserRelationEntity ToBLL(TaskUserModel taskUser)
+        public static TaskUserEntity ToBLL(TaskUserModel taskUser)
         {
-            return new TaskUserRelationEntity
+            return new TaskUserEntity
             {
                 UserId = taskUser.UserId,
                 TaskId = taskUser.TaskId,
@@ -35,7 +35,7 @@ namespace TaskManager.Models
             };
         }
         
-        public static TaskUserModel ToModel(TaskUserRelationEntity taskUser)
+        public static TaskUserModel ToModel(TaskUserEntity taskUser)
         {
             return new TaskUserModel
             {

@@ -1,9 +1,10 @@
-﻿@{    
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@using TaskManager.Models;
+﻿@using TaskManager.Models;
 @model IEnumerable<TaskUserModel>
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "TaskViewer", null, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+} 
 
 @if (String.Empty == ViewBag.taskTitle)
 {
@@ -23,23 +24,23 @@
     </div>
 }
 else
-{    
+{
     <h2>Give @ViewBag.taskTitle to:</h2>
     using (Html.BeginForm((string)ViewBag.GetSecond, "TaskViewer", FormMethod.Post, new { id = "taskSelecet" }))
     {
         @Html.TextBox("taskId", (Guid)ViewBag.taskId, new { hidden =  "hidden"})
-        bool userExist = false;        
+        bool userExist = false;
         foreach (var userTask in Model)
         {           
-            @Html.CheckBox("Guid-"+userTask.UserId.ToString())
+            <input name="users" type="checkbox" value="@userTask.UserId" />
             @userTask.UserLogin<br>
            userExist = true;
         }
-       if (userExist) 
-       {           
-           <input type="submit" value="Select"/> 
+       if (userExist)
+       {
+           <input type="submit" value="Select"/>
        }
-       else { <h2>There are no users to tasks</h2> }
+       else { <h2>@ViewBag.message</h2> }
     }
 
 }

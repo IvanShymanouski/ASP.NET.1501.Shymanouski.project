@@ -12,8 +12,7 @@ namespace ORM
 
             this.Property(u => u.Email).IsRequired();
 
-            this.Property(u => u.Password).IsRequired(); 
-
+            this.Property(u => u.Password).IsRequired();
         }
     }
 }

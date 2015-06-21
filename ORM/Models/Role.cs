@@ -8,10 +8,10 @@ namespace ORM
         public Guid Id { get; set; }
         public string Name { get; set; }
         
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<RoleUser> Users { get; set; }
         public Role()
         {
-            Users = new HashSet<User>();
+            Users = new HashSet<RoleUser>();
         }
     }
 }

@@ -1,10 +1,16 @@
 ﻿@{    
-    ViewBag.Title = "TaskViewer";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Task editor";
 }
+
+@section navigation{
+    @Html.ActionLink("Back", "Index", "Home", null, new { style = "margin-right : 20px" })
+    @Html.Partial("_Navigation")
+} 
 
 @using TaskManager.Models;
 @model IEnumerable<TaskModel>
+
+<b>@ViewBag.message</b><br>
 
 <div id="tasks">
     @using (Html.BeginForm("Index", "TaskEditor", FormMethod.Post, new { id = "userSelecet" }))

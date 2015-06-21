@@ -1,5 +1,4 @@
-﻿using System;
-using ORM;
+﻿using ORM;
 using DAL.Interfaces;
 
 namespace DAL

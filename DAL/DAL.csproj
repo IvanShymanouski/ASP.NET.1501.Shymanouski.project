@@ -50,14 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\Entities\TaskUserDAL.cs" />
     <Compile Include="Interfaces\Entities\IDALHasIdEntity.cs" />
+    <Compile Include="Interfaces\Repositories\IRoleUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IHasIdRepository.cs" />
+    <Compile Include="Mappres\SpecificMappers\RoleUserMapperDAL.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\RoleUserRepository.cs" />
     <Compile Include="Repository\HasIdRepository.cs" />
     <Compile Include="Repository\TaskUserRepository.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Interfaces\Entities\IDALEntity.cs" />
-    <Compile Include="Interfaces\Entities\TaskUserRelationDAL.cs" />
+    <Compile Include="Interfaces\Entities\RoleUserDAL.cs" />
     <Compile Include="Interfaces\Entities\RoleDAL.cs" />
     <Compile Include="Interfaces\Entities\TaskDAL.cs" />
     <Compile Include="Interfaces\Entities\UserDAL.cs" />
@@ -65,7 +69,7 @@
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUnitOfWork.cs" />
     <Compile Include="Mappres\IMapperDAL.cs" />
-    <Compile Include="Mappres\SpecificMappers\TaskUserRelationMapperDAL.cs" />
+    <Compile Include="Mappres\SpecificMappers\TaskUserMapperDAL.cs" />
     <Compile Include="Mappres\SpecificMappers\RoleMapperDAL.cs" />
     <Compile Include="Mappres\SpecificMappers\TaskMapperDAL.cs" />
     <Compile Include="Mappres\SpecificMappers\UserMapperDAL.cs" />
@@ -76,9 +80,6 @@
       <Project>{3eb399e7-87d4-4b17-a48b-7069d92457fa}</Project>
       <Name>ORM</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

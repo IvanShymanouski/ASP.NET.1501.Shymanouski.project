@@ -7,20 +7,20 @@ using ORM;
 
 namespace DAL
 {
-    public class TaskUserRepository : BaseRepository<TaskUserRelation, TaskUserRelationDAL, TaskUserRelationMapperDAL>, ITaskUserRepository
+    public class TaskUserRepository : BaseRepository<TaskUser, TaskUserDAL, TaskUserMapperDAL>, ITaskUserRepository
     {
         public TaskUserRepository(DbContext context) : base(context) { }
 
-        public IEnumerable<TaskUserRelationDAL> GetByUserId(Guid userId)
+        public IEnumerable<TaskUserDAL> GetByUserId(Guid userId)
         {
-            Func<TaskUserRelation, TaskUserRelationDAL> f = (obj) => _entityMapper.ToDAL(obj);
-            return _context.Set<TaskUserRelation>().AsNoTracking().Where(x => x.UserId == userId).Select(f);
+            Func<TaskUser, TaskUserDAL> f = (obj) => _entityMapper.ToDAL(obj);
+            return _context.Set<TaskUser>().AsNoTracking().Where(x => x.UserId == userId).Select(f);
         }
 
-        public IEnumerable<TaskUserRelationDAL> GetByTaskId(Guid taskId)
+        public IEnumerable<TaskUserDAL> GetByTaskId(Guid taskId)
         {
-            Func<TaskUserRelation, TaskUserRelationDAL> f = (obj) => _entityMapper.ToDAL(obj);
-            return _context.Set<TaskUserRelation>().AsNoTracking().Where(x => x.TaskId == taskId).Select(f);
+            Func<TaskUser, TaskUserDAL> f = (obj) => _entityMapper.ToDAL(obj);
+            return _context.Set<TaskUser>().AsNoTracking().Where(x => x.TaskId == taskId).Select(f);
         }
     }
 }

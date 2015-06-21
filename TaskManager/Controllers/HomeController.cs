@@ -12,22 +12,16 @@ namespace TaskManager.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly IHasIdService<UserEntity> service;
         private readonly IHasIdService<RoleEntity> roles;
 
-        public HomeController(IHasIdService<UserEntity> service, IHasIdService<RoleEntity> roles)
+        public HomeController(IHasIdService<RoleEntity> roles)
         {
-            this.service = service;
             this.roles = roles;
         }        
 
         [HttpPost]
         public ActionResult Index(RegisterModel model, string id)
         {
-            var temp0 = model.Login;
-            var temp1 = model.Email;
-            var temp2 = model.Password;
-            var temp3 = model.ConfirmPassword;
             return View();
         }
 

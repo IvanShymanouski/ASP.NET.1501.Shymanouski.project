@@ -1,9 +1,14 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section navigation{
+    @Html.ActionLink("Back", "Index", "Home", new { area = "" }, new { style = "margin-right : 20px"})
+    @Html.Partial("_Navigation")
+}    
 
-@Html.ActionLink("User roles manipulations", "Index", "UserRoles")
+@Html.ActionLink("Account roles manipulations", "Index", "UserRoles")
 <br>
-@Html.ActionLink("Creation new user", "Index", "CreationUser")
+@Html.ActionLink("Creation new account", "Index", "CreationUser")
+<br>
+@Html.ActionLink("Deleting account", "Index", "DeleteUser")

@@ -19,8 +19,7 @@ namespace TaskManager
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/Content/js").Include(
-                          "~/Scripts/bootstrap.js",
-                          "~/Scripts/bootstrap.min.js"));
+                          "~/Scripts/bootstrap.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -29,9 +28,8 @@ namespace TaskManager
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                           "~/Content/site.css",
-                          "~/Content/bootstrap-theme.min.css"/*,
-                          "~/Scripts/bootstrap.js",
-                          "~/Scripts/bootstrap.min.js"*/));
+                          "~/Content/bootstrap-theme.css",
+                          "~/Content/bootstrap.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

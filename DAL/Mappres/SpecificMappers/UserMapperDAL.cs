@@ -1,5 +1,4 @@
-﻿using System;
-using ORM;
+﻿using ORM;
 using DAL.Interfaces;
 
 namespace DAL
@@ -13,8 +12,7 @@ namespace DAL
                 Id = userDAL.Id,
                 Login = userDAL.Login,
                 Email = userDAL.Email,
-                Password = userDAL.Password,
-                RoleId = userDAL.RoleId
+                Password = userDAL.Password
             };
         }
 
@@ -25,8 +23,7 @@ namespace DAL
                 Id = user.Id,
                 Login = user.Login,
                 Email = user.Email,
-                Password = user.Password,
-                RoleId = user.RoleId
+                Password = user.Password
             };
         }
     }

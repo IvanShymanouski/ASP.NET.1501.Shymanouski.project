@@ -9,10 +9,10 @@ namespace ORM
         public string Title { get; set; }        
         public string Description { get; set; }
 
-        public virtual ICollection<TaskUserRelation> TaskUserRelation { get; set; }
+        public virtual ICollection<TaskUser> Users { get; set; }
         public Task()
         {
-            TaskUserRelation = new HashSet<TaskUserRelation>();
+            Users = new HashSet<TaskUser>();
         }
     }
 }
