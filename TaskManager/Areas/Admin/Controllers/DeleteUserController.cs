@@ -8,10 +8,11 @@ using TaskManager.Models;
 using TaskManager.Providers;
 using System.Text.RegularExpressions;
 using BLL.Interfaces;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleAdmin)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
     public class DeleteUserController : Controller
     {
         IHasIdService<UserEntity> userService;

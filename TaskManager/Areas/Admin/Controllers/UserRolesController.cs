@@ -6,10 +6,12 @@ using BLL.Interfaces;
 using TaskManager.Models;
 using TaskManager.Providers;
 using System.Text.RegularExpressions;
+using TaskManager.Authentification;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleAdmin)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
     public class UserRolesController : Controller
     {
         IHasIdService<UserEntity> userService;

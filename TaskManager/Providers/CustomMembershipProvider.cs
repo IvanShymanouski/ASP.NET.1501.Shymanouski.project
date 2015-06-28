@@ -2,6 +2,9 @@
 using System.Web.Security;
 using System.Web.Helpers;
 using BLL.Interfaces;
+using System.Collections.Specialized;
+using System.Web;
+using System.Web.Caching;
 
 namespace TaskManager.Providers
 {
@@ -25,10 +28,10 @@ namespace TaskManager.Providers
             return users.Find(x => (x.Email == emailOrLogin || x.Login == emailOrLogin) && Crypto.VerifyHashedPassword(x.Password, password));
         }
 
-        public MembershipUser CreateUser(string login, string email, string password)
+        public UserEntity CreateUser(string login, string email, string password)
         {
             IHasIdService<UserEntity> users = (IHasIdService<UserEntity>)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IHasIdService<UserEntity>));
-            MembershipUser membershipUser = null;
+            UserEntity membershipUser = null;
 
             if (null == FindUser(login, email))
             {
@@ -40,7 +43,7 @@ namespace TaskManager.Providers
                                 Password = Crypto.HashPassword(password)
                             };
                 users.Add(user);
-                membershipUser = GetUser(email);
+                membershipUser = user;//GetUser(email);
             }
 
             return membershipUser;

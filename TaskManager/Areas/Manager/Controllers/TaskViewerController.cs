@@ -7,10 +7,11 @@ using TaskManager.Providers;
 using TaskManager.Models;
 using BLL.Interfaces;
 using System.Text.RegularExpressions;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleManager)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleManager)]
     public class TaskViewerController : Controller
     {
         const string SearchKey = "Guid-";

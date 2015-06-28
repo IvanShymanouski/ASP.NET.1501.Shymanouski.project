@@ -6,10 +6,12 @@ using System.Web.Mvc;
 using BLL.Interfaces;
 using TaskManager.Models;
 using TaskManager.Infrastructure;
+using System.Net.Mail;
+using TaskManager.Authentification;
 
 namespace TaskManager.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     public class HomeController : Controller
     {
         private readonly IHasIdService<RoleEntity> roles;
@@ -22,6 +24,7 @@ namespace TaskManager.Controllers
         [HttpPost]
         public ActionResult Index(RegisterModel model, string id)
         {
+            
             return View();
         }
 
@@ -36,7 +39,10 @@ namespace TaskManager.Controllers
             ViewBag.Title = "Index";
             ViewBag.All =  roles.GetAll();
 
-            return View();
+            var modules = HttpContext.ApplicationInstance.Modules;
+            string[] modArray = modules.AllKeys;
+
+            return View(modArray);
         }
 
         [AllowAnonymous]

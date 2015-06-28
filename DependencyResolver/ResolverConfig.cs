@@ -7,15 +7,14 @@ using DAL;
 using DAL.Interfaces;
 using ORM;
 
-
-namespace DependencyResolver
+namespace CustomNinjectDependencyResolver
 {
     public static class ResolverConfig
     {
         public static void ConfigurateResolver(this IKernel kernel)
         {
             Database.SetInitializer<EntityModel>(new InitializeEntityModel());
-            kernel.Bind<DbContext>().To<EntityModel>().InRequestScope();            
+            kernel.Bind<DbContext>().To<EntityModel>().InRequestScope();
 
             kernel.Bind<IHasIdRepository<TaskDAL>>().To<HasIdRepository<Task, TaskDAL, TaskMapperDAL>>();
             kernel.Bind<IHasIdRepository<UserDAL>>().To<HasIdRepository<User, UserDAL, UserMapperDAL>>();
@@ -30,6 +29,11 @@ namespace DependencyResolver
             kernel.Bind<IRoleUserService>().To<RoleUserService>();
 
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+        }
+
+        public static void Reconficuration(this IKernel kernel)
+        {
+            ((EntityModel)kernel.GetService(typeof(DbContext))).Dispose();            
         }
     }
 

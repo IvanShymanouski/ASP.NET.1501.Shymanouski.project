@@ -1,10 +1,11 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using TaskManager.Infrastructure;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [Authorize(Roles=RoleKeysNames.roleManager)]
+    [CustomAuthorize(Roles=RoleKeysNames.roleManager)]
     public class AccountController : Controller
     {
         

@@ -1,9 +1,10 @@
 ﻿using System.Web.Mvc;
 using TaskManager.Infrastructure;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleManager)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleManager)]
     public class HomeController : Controller
     {
         public ActionResult Index()

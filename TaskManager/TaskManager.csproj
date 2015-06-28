@@ -184,6 +184,12 @@
     </Compile>
     <Compile Include="Areas\User\Controllers\TaskViewerController.cs" />
     <Compile Include="Areas\User\Controllers\TaskEditorController.cs" />
+    <Compile Include="Authentification\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Authentification\FormsAuthenticationService.cs" />
+    <Compile Include="Authentification\Cookie.cs" />
+    <Compile Include="Authentification\Identity.cs" />
+    <Compile Include="Authentification\Principal.cs" />
+    <Compile Include="Authentification\SupportPrincipalService.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Areas\User\Controllers\AccountController.cs" />
     <Compile Include="Areas\User\Controllers\HomeController.cs" />

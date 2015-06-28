@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using TaskManager.Infrastructure;
 using BLL.Interfaces;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.User.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleUser)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleUser)]
     public class HomeController : Controller
     {
         public ActionResult Index(string message = "")

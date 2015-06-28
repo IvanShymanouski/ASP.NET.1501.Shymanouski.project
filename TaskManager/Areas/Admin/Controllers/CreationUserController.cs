@@ -4,10 +4,11 @@ using System.Web.Mvc;
 using TaskManager.Infrastructure;
 using TaskManager.Models;
 using TaskManager.Providers;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [Authorize(Roles = RoleKeysNames.roleAdmin)]
+    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
     public class CreationUserController : Controller
     {
         public ActionResult Index(string message = "")

@@ -11,6 +11,8 @@ namespace TaskManager.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using TaskManager.Infrastructure;
+    using TaskManager.Authentification;
+    using CustomNinjectDependencyResolver;
 
     public static class NinjectWebCommon 
     {
@@ -31,7 +33,8 @@ namespace TaskManager.App_Start
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();            
+            bootstrapper.Kernel.Reconficuration();
+            bootstrapper.ShutDown();
         }
         
         /// <summary>
@@ -45,6 +48,10 @@ namespace TaskManager.App_Start
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+
+                kernel.Bind<IFormsAuthenticationService>().To<CustomAuthenticationService>();
+                kernel.Bind<IPrincipalService>().To<SupportPrincipalService>();
+                kernel.Bind<HttpContextBase>().ToMethod(context => new HttpContextWrapper(HttpContext.Current));
 
                 RegisterServices(kernel);
                 return kernel;

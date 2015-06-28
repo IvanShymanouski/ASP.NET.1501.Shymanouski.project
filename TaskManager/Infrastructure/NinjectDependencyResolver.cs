@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using Ninject;
-using DependencyResolver;
+using CustomNinjectDependencyResolver;
 
 namespace TaskManager.Infrastructure
 {

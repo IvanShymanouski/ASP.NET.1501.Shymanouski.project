@@ -2,10 +2,11 @@
 using System.Web.Security;
 using TaskManager.Infrastructure;
 using BLL.Interfaces;
+using TaskManager.Authentification;
 
 namespace TaskManager.Areas.User.Controllers
 {
-    [Authorize(Roles=RoleKeysNames.roleUser)]
+    [CustomAuthorize(Roles=RoleKeysNames.roleUser)]
     public class AccountController : Controller
     {
         

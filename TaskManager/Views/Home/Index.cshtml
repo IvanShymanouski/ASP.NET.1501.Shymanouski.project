@@ -1,5 +1,5 @@
 ﻿@using BLL.Interfaces;
-@model TaskManager.Models.RegisterModel
+@model string[]
 
 @section navigation{
     @Html.Partial("_Navigation")
@@ -17,4 +17,12 @@
                     </th> 
                  </tr><br />
         }
+
+
+ <ul>
+    @foreach(string s in Model)
+    {
+        <li>@s</li>
+    }
+</ul>
 </div>

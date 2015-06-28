@@ -1,13 +1,18 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using System.Web.Security;
 using TaskManager.Models;
 using TaskManager.Providers;
 using BLL.Interfaces;
 using TaskManager.Infrastructure;
+using System.Web;
+using System.Web.Routing;
+using TaskManager.Authentification;
 
 namespace TaskManager.Controllers
 {
-    [Authorize]
+    [CustomAuthorize]
     public class AccountController : Controller
     {
         [AllowAnonymous]
@@ -24,10 +29,11 @@ namespace TaskManager.Controllers
             ActionResult result = View(model);
             if (ModelState.IsValid)
             {
-                UserEntity user =  ((CustomMembershipProvider)Membership.Provider).ValidateUserAndReturn(model.EmailOrLogin, model.Password);
+                UserEntity user = (new CustomMembershipProvider()).ValidateUserAndReturn(model.EmailOrLogin, model.Password);
                 if (null != user)
                 {
-                    FormsAuthentication.SetAuthCookie(user.Login, model.RememberMe);
+                    var setCockie = DependencyResolver.Current.GetService<IFormsAuthenticationService>();
+                    setCockie.SignIn(new Identity(user), model.RememberMe);
                     result = RedirectToAction("Index", "Home");
                 }
                 else
@@ -62,10 +68,12 @@ namespace TaskManager.Controllers
 
             if (ModelState.IsValid)
             {
-                if (null != ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Login, model.Email, model.Password))
+                UserEntity user = (new CustomMembershipProvider()).CreateUser(model.Login, model.Email, model.Password);
+                if (null != user)
                 {
                     (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeysNames.roleUser });
-                    FormsAuthentication.SetAuthCookie(model.Login, false);
+                    var setCockie = DependencyResolver.Current.GetService<IFormsAuthenticationService>();
+                    setCockie.SignIn(new Identity(user), false);
                     result = RedirectToAction("Index", "Home", new { area = RoleKeysNames.roleUser });
                 }
                 else
@@ -114,5 +122,5 @@ namespace TaskManager.Controllers
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
-    }
+    }   
 }

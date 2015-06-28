@@ -70,9 +70,9 @@ namespace BLL.Tests
             DbContext context = new EntityModel();
             IHasIdService<UserEntity> users = new HasIdService<UserDAL, UserEntity, IHasIdRepository<UserDAL>, UserMapper>(new HasIdRepository<User, UserDAL, UserMapperDAL>(context), new UnitOfWork(context));
 
-            var user = new UserEntity() { Id = keysUser[0], Login = "Login", Password = "Password", Email = "Email", RoleId = keys[0] };
+            var user = new UserEntity() { Id = keysUser[0], Login = "Login", Password = "Password", Email = "Email"};
             users.Add(user);
-            user = new UserEntity() { Id = keysUser[1], Login = "Login1", Password = "Password", Email = "Email", RoleId = keys[1] };
+            user = new UserEntity() { Id = keysUser[1], Login = "Login1", Password = "Password", Email = "Email"};
             users.Add(user);
         }
 
@@ -102,13 +102,13 @@ namespace BLL.Tests
             taskUser = new TaskUserRelationEntity() { UserId = keysUser[1], TaskId = keysTasks[1], Status = 0, Progress = 0 };
             taskUsers.Add(taskUser);
             */
-            var taskUser = new TaskUserRelationEntity() { UserId = keysUser[0], TaskId = keysTasks[0], Status = 0, Progress = 0 };
+            var taskUser = new TaskUserEntity() { UserId = keysUser[0], TaskId = keysTasks[0],  Progress = 0 };
             taskUsers.Delete(taskUser);
-            taskUser = new TaskUserRelationEntity() { UserId = keysUser[0], TaskId = keysTasks[1], Status = 0, Progress = 0 };
+            taskUser = new TaskUserEntity() { UserId = keysUser[0], TaskId = keysTasks[1], Progress = 0 };
             taskUsers.Delete(taskUser);
-            taskUser = new TaskUserRelationEntity() { UserId = keysUser[1], TaskId = keysTasks[0], Status = 0, Progress = 0 };
+            taskUser = new TaskUserEntity() { UserId = keysUser[1], TaskId = keysTasks[0], Progress = 0 };
             taskUsers.Delete(taskUser);
-            taskUser = new TaskUserRelationEntity() { UserId = keysUser[1], TaskId = keysTasks[1], Status = 0, Progress = 0 };
+            taskUser = new TaskUserEntity() { UserId = keysUser[1], TaskId = keysTasks[1], Progress = 0 };
             taskUsers.Delete(taskUser);
         }
         #endregion   
