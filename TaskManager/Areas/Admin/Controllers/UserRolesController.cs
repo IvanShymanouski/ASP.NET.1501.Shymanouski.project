@@ -7,11 +7,10 @@ using TaskManager.Models;
 using TaskManager.Providers;
 using System.Text.RegularExpressions;
 using TaskManager.Authentification;
-using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
+    [AdminAuthorize]
     public class UserRolesController : Controller
     {
         IHasIdService<UserEntity> userService;
@@ -23,9 +22,9 @@ namespace TaskManager.Areas.Admin.Controllers
 
         public ActionResult Index(string message)
         {
-            ViewBag.roles = RoleKeysNames.names;
+            ViewBag.roles = RoleKeys.names;
             ViewBag.message = message;
-            return View();            
+            return View();
         }
 
         #region roles of user
@@ -43,7 +42,7 @@ namespace TaskManager.Areas.Admin.Controllers
             TempData["roles"] = (new CustomRoleProvider()).GetRolesForUser(userLogin);
             TempData["login"] = userLogin;
             return RedirectToAction("SeeUserRoles");
-        }       
+        }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult SeeUserRolesAjax(string userLogin)
@@ -85,7 +84,7 @@ namespace TaskManager.Areas.Admin.Controllers
         public ActionResult AddUserToRolesAction(string userLogin, string[] roles)
         {
             (new CustomRoleProvider()).AddUsersToRoles(new string[] { userLogin }, roles);
-            return RedirectToAction("Index", new { message = "New roles to "+userLogin+" added" });
+            return RedirectToAction("Index", new { message = "New roles to " + userLogin + " added" });
         }
         #endregion
 
@@ -99,7 +98,7 @@ namespace TaskManager.Areas.Admin.Controllers
             ViewBag.actionName = "TakeUserRolesAjax";
             ViewBag.messsage = "Account have no roles";
 
-            return View("UserRoles",TempData["roles"]);
+            return View("UserRoles", TempData["roles"]);
         }
 
         [HttpPost]
@@ -122,7 +121,7 @@ namespace TaskManager.Areas.Admin.Controllers
         public ActionResult DeleteUserFromRolesAction(string userLogin, string[] roles)
         {
             (new CustomRoleProvider()).RemoveUsersFromRoles(new string[] { userLogin }, roles);
-            return RedirectToAction("Index", new { message = "Roles from "+userLogin+" deleted" });
+            return RedirectToAction("Index", new { message = "Roles from " + userLogin + " deleted" });
         }
         #endregion
 
@@ -130,7 +129,7 @@ namespace TaskManager.Areas.Admin.Controllers
         public JsonResult GetUsersAjax(string userLogin)
         {
             return Json(HelperFunctions.GetUsersAjax(userLogin, userService), JsonRequestBehavior.AllowGet);
-        }        
+        }
 
         private IEnumerable<string> TakeTheRoleDoesNotBelongToTheUser(string userLogin)
         {

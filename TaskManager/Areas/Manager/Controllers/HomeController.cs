@@ -4,7 +4,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleManager)]
+    [ManagerAuthorize]
     public class HomeController : Controller
     {
         public ActionResult Index()

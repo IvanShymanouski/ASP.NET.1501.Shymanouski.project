@@ -9,7 +9,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.User.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleUser)]
+    [UserAuthorize]
     public class HomeController : Controller
     {
         public ActionResult Index(string message = "")

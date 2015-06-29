@@ -1,4 +1,6 @@
 ﻿@using TaskManager.Providers;
+@using TaskManager.Infrastructure;
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,10 +22,25 @@
                     <section id="login" style="display : inline; position:absolute; right : 15px">
                         @Html.Partial("_LoginPartial")
                     </section>
-                    <div style ="margin-top: 15px">                        
-                       @foreach (var role in (new CustomRoleProvider()).GetRolesForUser(User.Identity.Name))
-                       {
-                           @Html.ActionLink(role + " zone", "Index", "Home", new { area = role }, new { style = "margin-right : 20px"})
+                    <div style ="margin-top: 15px">
+                       @{
+                           var roleProvider = new CustomRoleProvider();
+                           foreach (var rolesObj in AreasAccess.Roles)
+                           {
+                               var roles = rolesObj.Value.Split(',');
+                               if (roles.Length>0){
+                                  foreach(var role in roles){
+                                    if (roleProvider.IsUserInRole(User.Identity.Name, role.Trim())
+                                        &&
+                                        (AreasAccess.Users[rolesObj.Key] == String.Empty ||
+                                         AreasAccess.Users[rolesObj.Key].IndexOf(User.Identity.Name) >= 0))
+                                    {
+                                        @Html.ActionLink(rolesObj.Key + " zone", "Index", "Home", new { area = rolesObj.Key }, new { style = "margin-right : 20px" })
+                                        break;
+                                    }                               
+                                  }
+                               }
+                           }
                        }
                     </div>
                 </div>            

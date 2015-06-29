@@ -10,7 +10,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.User.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleUser)]
+    [UserAuthorize]
     public class TaskEditorController : Controller
     {
         IHasIdService<UserEntity> userService;
@@ -57,10 +57,10 @@ namespace TaskManager.Areas.User.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProgress(TaskUserModel task, bool unused=false)
+        public ActionResult EditProgress(TaskUserModel task, bool unused = false)
         {
             ActionResult result = View(task);
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 if (task.Progress <= 100 && task.Progress >= 0)
                 {
@@ -68,14 +68,14 @@ namespace TaskManager.Areas.User.Controllers
                     TaskUserEntity tue = taskUserService.Find(x => x.TaskId == task.TaskId && x.UserId == user.Id);
                     tue.Progress = task.Progress;
                     taskUserService.Edit(tue);
-                    result = RedirectToAction("Index", "Home", new { message = "Progress of task "+task.TaskTitle+" updated" });
+                    result = RedirectToAction("Index", "Home", new { message = "Progress of task " + task.TaskTitle + " updated" });
                 }
                 else
                 {
                     ModelState.AddModelError("", "Progress must be integer in range [0,100]");
                 }
-            }          
-            
+            }
+
             return result;
         }
 
@@ -100,7 +100,7 @@ namespace TaskManager.Areas.User.Controllers
             }
 
             return itIs;
-        }        
+        }
 
     }
 }

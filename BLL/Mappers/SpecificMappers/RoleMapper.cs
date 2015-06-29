@@ -16,11 +16,12 @@ namespace BLL
 
         public RoleEntity ToBLL(RoleDAL role)
         {
-            return new RoleEntity()
-            {
-                Id = role.Id,
-                Name = role.Name
-            };
+            return (null == role) ? null :
+                new RoleEntity()
+                {
+                    Id = role.Id,
+                    Name = role.Name
+                };
         }
     }
 }

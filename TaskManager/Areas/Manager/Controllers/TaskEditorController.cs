@@ -8,7 +8,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleManager)]
+    [ManagerAuthorize]
     public class TaskEditorController : Controller
     {
         IHasIdService<TaskEntity> taskService;
@@ -18,7 +18,7 @@ namespace TaskManager.Areas.Manager.Controllers
             this.taskService = taskService;
         }
 
-        public ActionResult Index(string message="")
+        public ActionResult Index(string message = "")
         {
             ViewBag.message = message;
             return View();
@@ -61,7 +61,7 @@ namespace TaskManager.Areas.Manager.Controllers
             {
                 taskService.Edit(TaskMapper.ToBLL(task));
                 result = RedirectToAction("Index", "TaskEditor", new { message = "Task updated" });
-            }                         
+            }
             return result;
         }
 
@@ -69,11 +69,11 @@ namespace TaskManager.Areas.Manager.Controllers
         public ActionResult GetTask(Guid taskId)
         {
             var task = taskService.GetById(taskId);
-            if(Request.IsAjaxRequest())
+            if (Request.IsAjaxRequest())
             {
                 return Json(task);
             }
-            return RedirectToAction("_EditTask",TaskMapper.ToModel(task));
+            return RedirectToAction("_EditTask", TaskMapper.ToModel(task));
         }
 
         public ActionResult _EditTask(TaskModel task)
@@ -103,6 +103,6 @@ namespace TaskManager.Areas.Manager.Controllers
             foreach (var task in tasks) taskList.Add(TaskMapper.ToModel(task));
             return taskList;
         }
-        
+
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Collections.Generic;
 
 namespace TaskManager.Authentification
 {
@@ -11,7 +12,7 @@ namespace TaskManager.Authentification
         private string[] allowedUsers = new string[] { };
         private string[] allowedRoles = new string[] { };
 
-        public CustomAuthorizeAttribute()
+        public CustomAuthorizeAttribute():base()
         { }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
@@ -39,8 +40,16 @@ namespace TaskManager.Authentification
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectToRouteResult(new
-               RouteValueDictionary(new { controller = "Account", action = "Login", area = "" }));
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                filterContext.Result = new RedirectToRouteResult(new
+                RouteValueDictionary(new { controller = "Access", action = "Denied", area = "" }));
+            }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new
+                   RouteValueDictionary(new { controller = "Account", action = "Login", area = "" }));
+            }
         }
 
         private bool User(HttpContextBase httpContext)

@@ -10,7 +10,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.User.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleUser)]
+    [UserAuthorize]
     public class TaskViewerController : Controller
     {
         IHasIdService<UserEntity> userService;
@@ -49,7 +49,7 @@ namespace TaskManager.Areas.User.Controllers
         {
             UserEntity user = userService.Find(x => x.Login == User.Identity.Name);
             IEnumerable<TaskUserEntity> taskUser = taskUserService.GetByUserId(user.Id);
-            IEnumerable<TaskEntity> tasks = taskService.GetAll().Where(x => IsItUserTask(taskUser,x.Id));
+            IEnumerable<TaskEntity> tasks = taskService.GetAll().Where(x => IsItUserTask(taskUser, x.Id));
             List<TaskModel> taskList = new List<TaskModel>(0);
             foreach (var task in tasks) taskList.Add(TaskMapper.ToModel(task));
             return taskList;
@@ -66,7 +66,7 @@ namespace TaskManager.Areas.User.Controllers
             }
 
             return itIs;
-        }               
+        }
 
     }
 }

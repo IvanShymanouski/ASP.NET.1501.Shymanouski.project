@@ -10,19 +10,20 @@ namespace BLL
             return new TaskUserDAL()
             {
                 UserId = taskUser.UserId,
-                TaskId = taskUser.TaskId,                
+                TaskId = taskUser.TaskId,
                 Progress = taskUser.Progress
             };
         }
 
         public TaskUserEntity ToBLL(TaskUserDAL taskUser)
         {
-            return new TaskUserEntity()
-            {
-                UserId = taskUser.UserId,
-                TaskId = taskUser.TaskId,
-                Progress = taskUser.Progress
-            };
+            return (null == taskUser) ? null :
+                new TaskUserEntity()
+                {
+                    UserId = taskUser.UserId,
+                    TaskId = taskUser.TaskId,
+                    Progress = taskUser.Progress
+                };
         }
     }
 }

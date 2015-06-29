@@ -40,11 +40,11 @@
 }
 else
 {
-    if (((string[])ViewBag.roles).Length == 0){ <span>No account with Login @ViewBag.login</span>}
+    if (((List<string>)ViewBag.roles).Count == 0){ <span>No account with Login @ViewBag.login</span>}
     else{
         <span>Roles for @ViewBag.login:</span>
         <ul>        
-        @foreach(var role in (string[])ViewBag.roles){
+        @foreach(var role in (IEnumerable<string>)ViewBag.roles){
             <li>@role</li>
         }
         </ul>

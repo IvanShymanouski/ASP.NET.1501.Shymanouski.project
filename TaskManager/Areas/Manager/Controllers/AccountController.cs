@@ -5,10 +5,10 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [CustomAuthorize(Roles=RoleKeysNames.roleManager)]
+    [ManagerAuthorize]
     public class AccountController : Controller
     {
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()

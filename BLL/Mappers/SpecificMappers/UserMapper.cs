@@ -18,13 +18,14 @@ namespace BLL
 
         public UserEntity ToBLL(UserDAL user)
         {
-            return new UserEntity()
-            {
-                Id = user.Id,
-                Login = user.Login,
-                Email = user.Email,
-                Password = user.Password
-            };
+            return (null == user) ? null :
+                new UserEntity()
+                {
+                    Id = user.Id,
+                    Login = user.Login,
+                    Email = user.Email,
+                    Password = user.Password
+                };
         }
     }
 }

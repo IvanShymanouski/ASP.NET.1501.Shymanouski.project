@@ -20,7 +20,7 @@
     
     <b>Display accounts of role:</b>    
     <select name="role">
-    @foreach (var role in (string[])ViewBag.roles)
+    @foreach (var role in (IEnumerable<string>)ViewBag.roles)
     {
         <option value="@role">@role</option>        
     }

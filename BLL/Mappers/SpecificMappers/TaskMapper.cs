@@ -17,12 +17,13 @@ namespace BLL
 
         public TaskEntity ToBLL(TaskDAL task)
         {
-            return new TaskEntity()
-            {
-                Id = task.Id,
-                Description = task.Description,
-                Title = task.Title
-            };
+            return (null == task) ? null :
+                new TaskEntity()
+                {
+                    Id = task.Id,
+                    Description = task.Description,
+                    Title = task.Title
+                };
         }
     }
 }

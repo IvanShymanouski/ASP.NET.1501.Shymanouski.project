@@ -184,12 +184,21 @@
     </Compile>
     <Compile Include="Areas\User\Controllers\TaskViewerController.cs" />
     <Compile Include="Areas\User\Controllers\TaskEditorController.cs" />
-    <Compile Include="Authentification\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Authentification\Attrubutes\UserAuthorizeAttribute.cs" />
+    <Compile Include="Authentification\Attrubutes\AdminAuthorizeAttribute.cs" />
+    <Compile Include="Authentification\Attrubutes\ManagerAuthorizeAttribute.cs" />
+    <Compile Include="Authentification\Attrubutes\CustomAuthorizeAttribute.cs" />
     <Compile Include="Authentification\FormsAuthenticationService.cs" />
     <Compile Include="Authentification\Cookie.cs" />
     <Compile Include="Authentification\Identity.cs" />
     <Compile Include="Authentification\Principal.cs" />
     <Compile Include="Authentification\SupportPrincipalService.cs" />
+    <Compile Include="Controllers\AccessController.cs" />
+    <Compile Include="Infrastructure\Config\ConfigHelper.cs" />
+    <Compile Include="Infrastructure\Config\AreasAccessSettings.cs" />
+    <Compile Include="Infrastructure\Config\ISettings.cs" />
+    <Compile Include="Infrastructure\Config\RoleSettings.cs" />
+    <Compile Include="Infrastructure\AreasAccess.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Areas\User\Controllers\AccountController.cs" />
     <Compile Include="Areas\User\Controllers\HomeController.cs" />
@@ -347,6 +356,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Access\Denied.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

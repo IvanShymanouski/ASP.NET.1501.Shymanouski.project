@@ -5,22 +5,23 @@ namespace BLL
 {
     public class RoleUserMapper : IMapper<RoleUserDAL, RoleUserEntity>
     {
-        public RoleUserDAL ToDAL(RoleUserEntity toleUser)
+        public RoleUserDAL ToDAL(RoleUserEntity roleUser)
         {
             return new RoleUserDAL()
             {
-                UserId = toleUser.UserId,
-                RoleId = toleUser.RoleId
+                UserId = roleUser.UserId,
+                RoleId = roleUser.RoleId
             };
         }
 
-        public RoleUserEntity ToBLL(RoleUserDAL toleUser)
+        public RoleUserEntity ToBLL(RoleUserDAL roleUser)
         {
-            return new RoleUserEntity()
-            {
-                UserId = toleUser.UserId,
-                RoleId = toleUser.RoleId
-            };
+            return (null == roleUser) ? null :
+                new RoleUserEntity()
+                {
+                    UserId = roleUser.UserId,
+                    RoleId = roleUser.RoleId
+                };
         }
     }
 }

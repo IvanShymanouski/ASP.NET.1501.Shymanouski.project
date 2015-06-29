@@ -11,7 +11,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Manager.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleManager)]
+    [ManagerAuthorize]
     public class TaskViewerController : Controller
     {
         const string SearchKey = "Guid-";
@@ -137,7 +137,7 @@ namespace TaskManager.Areas.Manager.Controllers
             ViewBag.GetSecond = "BoundingTask";
             ViewBag.taskId = (TempData["taskId"] == null) ? Guid.Empty : (Guid)TempData["taskId"];
             ViewBag.message = "Task have all users";
-            
+
             return View("TaskToUsers", GetTasksOrShowUsers());
         }
 
@@ -178,7 +178,7 @@ namespace TaskManager.Areas.Manager.Controllers
 
         [HttpPost]
         public ActionResult DeletingUser(Guid userId, Guid[] tasks)
-        {            
+        {
             foreach (var taskId in tasks)
             {
                 taskUserService.Delete(new TaskUserEntity { TaskId = taskId, UserId = userId });
@@ -195,7 +195,7 @@ namespace TaskManager.Areas.Manager.Controllers
             ViewBag.GetSecond = "DeletingTask";
             ViewBag.taskId = (TempData["taskId"] == null) ? Guid.Empty : (Guid)TempData["taskId"];
             ViewBag.message = "No users on task";
-            
+
             return View("TaskToUsers", GetTasksOrShowUsers());
         }
 
@@ -207,7 +207,7 @@ namespace TaskManager.Areas.Manager.Controllers
 
         [HttpPost]
         public ActionResult DeletingTask(Guid taskId, Guid[] users)
-        {            
+        {
             foreach (var userId in users)
             {
                 taskUserService.Delete(new TaskUserEntity { TaskId = taskId, UserId = userId });
@@ -224,7 +224,7 @@ namespace TaskManager.Areas.Manager.Controllers
             if (null == modelUsers)
             {
                 modelUsers = new List<TaskUserModel>(0);
-                Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeysNames.roleUser);
+                Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeys.roleUser);
 
                 foreach (var user in usersId)
                 {
@@ -261,12 +261,12 @@ namespace TaskManager.Areas.Manager.Controllers
         }
 
         private IEnumerable<TaskUserModel> GetTasksOrShowUsers()
-        {            
+        {
             ViewBag.taskTitle = (null == TempData["title"]) ? String.Empty : (string)TempData["title"];
 
             IEnumerable<TaskUserModel> modelUsers = (List<TaskUserModel>)TempData["taskUserList"]; ;
             if (null == modelUsers)
-            {                
+            {
                 modelUsers = taskService.GetAll().Select(t => TaskUserMapper.ToModel(t));
             }
             return modelUsers;
@@ -281,7 +281,7 @@ namespace TaskManager.Areas.Manager.Controllers
             TaskEntity task = taskService.GetById(taskId);
 
             IEnumerable<TaskUserEntity> usersOnTask = taskUserService.GetByTaskId(taskId);
-            Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeysNames.roleUser);
+            Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeys.roleUser);
             foreach (var user in usersId)
             {
                 if (UserTaskRelation(usersOnTask, user))
@@ -305,7 +305,7 @@ namespace TaskManager.Areas.Manager.Controllers
         {
             bool itIs = false;
 
-            var users = taskUsers.Where(x => x.TaskId == taskId);            
+            var users = taskUsers.Where(x => x.TaskId == taskId);
             foreach (var t in users)
             {
                 itIs = true; break;

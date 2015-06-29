@@ -8,21 +8,21 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
+    [AdminAuthorize]
     public class CreationUserController : Controller
     {
         public ActionResult Index(string message = "")
         {
-            ViewBag.roles = RoleKeysNames.names;
+            ViewBag.roles = RoleKeys.names;
             ViewBag.message = message;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(RegisterModel model, string role="")
+        public ActionResult Index(RegisterModel model, string role = "")
         {
-            ViewBag.roles = RoleKeysNames.names;
+            ViewBag.roles = RoleKeys.names;
 
             ActionResult result = View(model);
 
@@ -30,7 +30,7 @@ namespace TaskManager.Areas.Admin.Controllers
             {
                 if (null != ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Login, model.Email, model.Password))
                 {
-                    if (role!=String.Empty) (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { role });
+                    if (role != String.Empty) (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { role });
                     result = RedirectToAction("Index", new { message = "Account " + model.Login + " create" });
                 }
                 else

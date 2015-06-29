@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TaskManager.Infrastructure
 {
-    public static class RoleKeysNames
+    public static class RoleKeys
     {
-        public static Guid[] keys = new Guid[]
+        public static List<Guid> keys = new List<Guid>
                 {
                     new Guid("7a64da52-20f4-4f59-942b-c1763a18632e"),
                     new Guid("365c9dd3-8ccf-49dc-8e6b-8509ffa55946"),
@@ -17,7 +17,7 @@ namespace TaskManager.Infrastructure
         public const string roleUser = "User";
         public const string roleAdmin = "Admin";
         public const string roleManager = "Manager";
-        public static string[] names = new string[]
+        public static List<string> names = new List<string>
                 {            
                     roleUser,
                     roleAdmin,

@@ -71,10 +71,10 @@ namespace TaskManager.Controllers
                 UserEntity user = (new CustomMembershipProvider()).CreateUser(model.Login, model.Email, model.Password);
                 if (null != user)
                 {
-                    (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeysNames.roleUser });
+                    (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeys.roleUser });
                     var setCockie = DependencyResolver.Current.GetService<IFormsAuthenticationService>();
                     setCockie.SignIn(new Identity(user), false);
-                    result = RedirectToAction("Index", "Home", new { area = RoleKeysNames.roleUser });
+                    result = RedirectToAction("Index", "Home", new { area = RoleKeys.roleUser });
                 }
                 else
                 {

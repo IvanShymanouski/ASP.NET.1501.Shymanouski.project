@@ -4,10 +4,10 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
+    [AdminAuthorize]
     public class HomeController : Controller
     {
-        public ActionResult Index(string message="")
+        public ActionResult Index(string message = "")
         {
             ViewBag.message = message;
             return View();
@@ -20,8 +20,8 @@ namespace TaskManager.Areas.Admin.Controllers
 
         public ActionResult Contact()
         {
-            return View();        
-        }      
-        
+            return View();
+        }
+
     }
 }

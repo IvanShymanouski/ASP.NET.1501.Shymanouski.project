@@ -12,7 +12,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Areas.Admin.Controllers
 {
-    [CustomAuthorize(Roles = RoleKeysNames.roleAdmin)]
+    [AdminAuthorize]
     public class DeleteUserController : Controller
     {
         IHasIdService<UserEntity> userService;
@@ -24,14 +24,14 @@ namespace TaskManager.Areas.Admin.Controllers
 
         public ActionResult Index(string message = "")
         {
-            ViewBag.roles = RoleKeysNames.names;
+            ViewBag.roles = RoleKeys.names;
             ViewBag.message = message;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string userLogin,string role)
+        public ActionResult Index(string userLogin, string role)
         {
             string message = "User " + userLogin + " not found";
 
@@ -42,13 +42,13 @@ namespace TaskManager.Areas.Admin.Controllers
                 message = "User " + userLogin + " deleted";
             }
 
-            return RedirectToAction("Index", new { message =  message});
+            return RedirectToAction("Index", new { message = message });
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult GetUsersAjax(string userLogin, string roleName)
         {
-            return Json(HelperFunctions.GetUsersAjax(userLogin,userService,roleName), JsonRequestBehavior.AllowGet);
+            return Json(HelperFunctions.GetUsersAjax(userLogin, userService, roleName), JsonRequestBehavior.AllowGet);
         }
     }
 }

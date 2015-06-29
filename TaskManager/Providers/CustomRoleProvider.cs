@@ -25,9 +25,9 @@ namespace TaskManager.Providers
                 foreach (var role in roles)
                 {
                     int ind = 0;
-                    while (ind < RoleKeysNames.keys.Length && RoleKeysNames.keys[ind] != role.RoleId) ind++;
-                    if (ind == RoleKeysNames.keys.Length) throw new ArgumentException("User " + user.Id + " has invalid roleId :" + role.RoleId);
-                    ur.Add(RoleKeysNames.names[ind]);
+                    while (ind < RoleKeys.keys.Count && RoleKeys.keys[ind] != role.RoleId) ind++;
+                    if (ind == RoleKeys.keys.Count) throw new ArgumentException("User " + user.Id + " has invalid roleId :" + role.RoleId);
+                    ur.Add(RoleKeys.names[ind]);
                 }
                 userRoles = new string[ur.Count];
                 for (int i = 0; i < ur.Count; i++) userRoles[i] = ur[i];
@@ -64,7 +64,7 @@ namespace TaskManager.Providers
 
         public override string[] GetAllRoles()
         {
-            return RoleKeysNames.names;
+            return RoleKeys.names.ToArray();
         }
 
         public override string[] GetUsersInRole(string roleName)
@@ -122,8 +122,8 @@ namespace TaskManager.Providers
         public override bool RoleExists(string roleName)
         {
             int i = 0;
-            while (i < RoleKeysNames.keys.Length && RoleKeysNames.names[i] != roleName) i++;
-            return (i < RoleKeysNames.keys.Length);            
+            while (i < RoleKeys.keys.Count && RoleKeys.names[i] != roleName) i++;
+            return (i < RoleKeys.keys.Count);            
         }
 
         public override void AddUsersToRoles(string[] userNames, string[] roleNames)
@@ -192,10 +192,10 @@ namespace TaskManager.Providers
         public Guid GetRoleId(string roleName)
         {
             int ind = 0;
-            while (ind < RoleKeysNames.names.Length && RoleKeysNames.names[ind] != roleName) ind++;
-            if (ind == RoleKeysNames.names.Length) throw new ArgumentException("Enter invalid roleName :" + roleName);
+            while (ind < RoleKeys.names.Count && RoleKeys.names[ind] != roleName) ind++;
+            if (ind == RoleKeys.names.Count) throw new ArgumentException("Enter invalid roleName :" + roleName);
 
-            return RoleKeysNames.keys[ind];
+            return RoleKeys.keys[ind];
         }
     }
 }
