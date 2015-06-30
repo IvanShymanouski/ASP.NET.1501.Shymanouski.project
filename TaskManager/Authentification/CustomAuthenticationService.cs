@@ -1,14 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Security.Principal;
 using System.Web.Security;
 
 namespace TaskManager.Authentification
 {
-    public class CustomAuthenticationService : IFormsAuthenticationService
+    public class CustomAuthenticationService : ICustomAuthenticationService
     {
         private readonly HttpContextBase _httpContext;
 
@@ -17,7 +15,7 @@ namespace TaskManager.Authentification
             _httpContext = httpContext;
         }
 
-        #region IFormsAuthenticationService Members
+        #region ICustomAuthenticationService Members
 
         public void SignIn(IIdentity identity, bool createPersistentCookie)
         {
@@ -54,7 +52,7 @@ namespace TaskManager.Authentification
     }
 
 
-    public interface IFormsAuthenticationService                     
+    public interface ICustomAuthenticationService                     
     {
         void SignIn(IIdentity user, bool createPersistentCookie);        
         void SignOut();

@@ -49,7 +49,7 @@ namespace TaskManager.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                kernel.Bind<IFormsAuthenticationService>().To<CustomAuthenticationService>();
+                kernel.Bind<ICustomAuthenticationService>().To<CustomAuthenticationService>();
                 kernel.Bind<IPrincipalService>().To<SupportPrincipalService>();
                 kernel.Bind<HttpContextBase>().ToMethod(context => new HttpContextWrapper(HttpContext.Current));
 

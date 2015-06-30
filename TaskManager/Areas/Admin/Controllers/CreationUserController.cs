@@ -28,9 +28,9 @@ namespace TaskManager.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                if (null != ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Login, model.Email, model.Password))
+                if (null != CustomMembershipProvider.CreateUser(model.Login, model.Email, model.Password))
                 {
-                    if (role != String.Empty) (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { role });
+                    if (role != String.Empty) CustomRoleProvider.AddUsersToRoles(new string[] { model.Login }, new string[] { role });
                     result = RedirectToAction("Index", new { message = "Account " + model.Login + " create" });
                 }
                 else

@@ -16,7 +16,7 @@ namespace TaskManager.Areas.Admin
 
             IEnumerable<string> users;
             if (roleName==String.Empty) users = userService.GetAll().Where(u => regex.Matches(u.Login).Count > 0).Select(u => u.Login);
-            else users = (new CustomRoleProvider()).GetUsersInRole(roleName).Where(x => regex.Matches(x).Count > 0);
+            else users = CustomRoleProvider.GetUsersInRole(roleName).Where(x => regex.Matches(x).Count > 0);
 
             List<string> userMatches = new List<string>(0);
             int i = 0;

@@ -29,10 +29,10 @@ namespace TaskManager.Controllers
             ActionResult result = View(model);
             if (ModelState.IsValid)
             {
-                UserEntity user = (new CustomMembershipProvider()).ValidateUserAndReturn(model.EmailOrLogin, model.Password);
+                UserEntity user = CustomMembershipProvider.ValidateUserAndReturn(model.EmailOrLogin, model.Password);
                 if (null != user)
                 {
-                    var setCockie = DependencyResolver.Current.GetService<IFormsAuthenticationService>();
+                    var setCockie = DependencyResolver.Current.GetService<ICustomAuthenticationService>();
                     setCockie.SignIn(new Identity(user), model.RememberMe);
                     result = RedirectToAction("Index", "Home");
                 }
@@ -68,11 +68,11 @@ namespace TaskManager.Controllers
 
             if (ModelState.IsValid)
             {
-                UserEntity user = (new CustomMembershipProvider()).CreateUser(model.Login, model.Email, model.Password);
+                UserEntity user = CustomMembershipProvider.CreateUser(model.Login, model.Email, model.Password);
                 if (null != user)
                 {
-                    (new CustomRoleProvider()).AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeys.roleUser });
-                    var setCockie = DependencyResolver.Current.GetService<IFormsAuthenticationService>();
+                    CustomRoleProvider.AddUsersToRoles(new string[] { model.Login }, new string[] { RoleKeys.roleUser });
+                    var setCockie = DependencyResolver.Current.GetService<ICustomAuthenticationService>();
                     setCockie.SignIn(new Identity(user), false);
                     result = RedirectToAction("Index", "Home", new { area = RoleKeys.roleUser });
                 }

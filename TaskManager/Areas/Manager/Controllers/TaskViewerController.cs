@@ -224,7 +224,7 @@ namespace TaskManager.Areas.Manager.Controllers
             if (null == modelUsers)
             {
                 modelUsers = new List<TaskUserModel>(0);
-                Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeys.roleUser);
+                Guid[] usersId = CustomRoleProvider.GetUsersIdInRole(RoleKeys.roleUser);
 
                 foreach (var user in usersId)
                 {
@@ -281,7 +281,7 @@ namespace TaskManager.Areas.Manager.Controllers
             TaskEntity task = taskService.GetById(taskId);
 
             IEnumerable<TaskUserEntity> usersOnTask = taskUserService.GetByTaskId(taskId);
-            Guid[] usersId = (new CustomRoleProvider()).GetUsersIdInRole(RoleKeys.roleUser);
+            Guid[] usersId = CustomRoleProvider.GetUsersIdInRole(RoleKeys.roleUser);
             foreach (var user in usersId)
             {
                 if (UserTaskRelation(usersOnTask, user))

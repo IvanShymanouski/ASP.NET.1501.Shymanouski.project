@@ -12,7 +12,7 @@ namespace TaskManager.Authentification
                 Roles = AreasAccess.Roles["Manager"];
                 Users = AreasAccess.Users["Manager"];
             }
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
                 //if (Roles == "") log else log
             }

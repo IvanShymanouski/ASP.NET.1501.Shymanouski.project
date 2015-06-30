@@ -39,7 +39,7 @@ namespace TaskManager.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SeeUserRoles(string userLogin, string unesed = "")
         {
-            TempData["roles"] = (new CustomRoleProvider()).GetRolesForUser(userLogin);
+            TempData["roles"] = CustomRoleProvider.GetRolesForUser(userLogin);
             TempData["login"] = userLogin;
             return RedirectToAction("SeeUserRoles");
         }
@@ -47,7 +47,7 @@ namespace TaskManager.Areas.Admin.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult SeeUserRolesAjax(string userLogin)
         {
-            return Json((new CustomRoleProvider()).GetRolesForUser(userLogin), JsonRequestBehavior.AllowGet);
+            return Json(CustomRoleProvider.GetRolesForUser(userLogin), JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -83,7 +83,7 @@ namespace TaskManager.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddUserToRolesAction(string userLogin, string[] roles)
         {
-            (new CustomRoleProvider()).AddUsersToRoles(new string[] { userLogin }, roles);
+            CustomRoleProvider.AddUsersToRoles(new string[] { userLogin }, roles);
             return RedirectToAction("Index", new { message = "New roles to " + userLogin + " added" });
         }
         #endregion
@@ -106,21 +106,21 @@ namespace TaskManager.Areas.Admin.Controllers
         public ActionResult DeleteUserFromRoles(string userLogin)
         {
             TempData["login"] = userLogin;
-            TempData["roles"] = (new CustomRoleProvider()).GetRolesForUser(userLogin);
+            TempData["roles"] = CustomRoleProvider.GetRolesForUser(userLogin);
             return RedirectToAction("DeleteUserFromRoles");
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public JsonResult TakeUserRolesAjax(string userLogin)
         {
-            return Json((new CustomRoleProvider()).GetRolesForUser(userLogin), JsonRequestBehavior.AllowGet);
+            return Json(CustomRoleProvider.GetRolesForUser(userLogin), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteUserFromRolesAction(string userLogin, string[] roles)
         {
-            (new CustomRoleProvider()).RemoveUsersFromRoles(new string[] { userLogin }, roles);
+            CustomRoleProvider.RemoveUsersFromRoles(new string[] { userLogin }, roles);
             return RedirectToAction("Index", new { message = "Roles from " + userLogin + " deleted" });
         }
         #endregion
@@ -132,11 +132,10 @@ namespace TaskManager.Areas.Admin.Controllers
         }
 
         private IEnumerable<string> TakeTheRoleDoesNotBelongToTheUser(string userLogin)
-        {
-            CustomRoleProvider CRP = new CustomRoleProvider();
-            string[] roles = CRP.GetRolesForUser(userLogin);
+        {            
+            string[] roles = CustomRoleProvider.GetRolesForUser(userLogin);
 
-            return CRP.GetAllRoles().Where(x => !RoleInRoles(x, roles));
+            return CustomRoleProvider.GetAllRoles().Where(x => !RoleInRoles(x, roles));
         }
 
         private bool RoleInRoles(string role, string[] roles)

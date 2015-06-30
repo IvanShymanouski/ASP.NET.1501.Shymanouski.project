@@ -188,7 +188,7 @@
     <Compile Include="Authentification\Attrubutes\AdminAuthorizeAttribute.cs" />
     <Compile Include="Authentification\Attrubutes\ManagerAuthorizeAttribute.cs" />
     <Compile Include="Authentification\Attrubutes\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Authentification\FormsAuthenticationService.cs" />
+    <Compile Include="Authentification\CustomAuthenticationService.cs" />
     <Compile Include="Authentification\Cookie.cs" />
     <Compile Include="Authentification\Identity.cs" />
     <Compile Include="Authentification\Principal.cs" />

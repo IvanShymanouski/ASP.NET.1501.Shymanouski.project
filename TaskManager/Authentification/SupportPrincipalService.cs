@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using System.Web;
 using System.Web.Security;
-using BLL.Interfaces;
 using Newtonsoft.Json;
 
 namespace TaskManager.Authentification

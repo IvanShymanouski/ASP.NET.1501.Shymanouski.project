@@ -1,11 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Web;
-using System.Web.Security;
-using System.Text;
 using BLL.Interfaces;
 using TaskManager.Providers;
 
@@ -42,7 +37,7 @@ namespace TaskManager.Authentification
             Id = user.Id;
             Login = user.Login;
             Email = user.Email;
-            Roles = (new CustomRoleProvider()).GetRolesForUser(user.Email);
+            Roles = CustomRoleProvider.GetRolesForUser(user.Email);
         }
 
         public Identity(Cookie user)

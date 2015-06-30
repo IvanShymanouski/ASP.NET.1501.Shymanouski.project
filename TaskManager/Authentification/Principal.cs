@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.Principal;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Security.Principal;
 using TaskManager.Providers;
 
 namespace TaskManager.Authentification
@@ -19,7 +16,7 @@ namespace TaskManager.Authentification
 
         public bool IsInRole(string roleName)
         {
-            return (new CustomRoleProvider()).IsUserInRole(identity.Email,roleName);
+            return CustomRoleProvider.IsUserInRole(identity,roleName);
         }
 
         public IIdentity Identity
