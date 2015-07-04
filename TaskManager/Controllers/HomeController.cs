@@ -11,7 +11,7 @@ using TaskManager.Authentification;
 
 namespace TaskManager.Controllers
 {
-    [CustomAuthorize]
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IHasIdService<RoleEntity> roles;
@@ -38,21 +38,18 @@ namespace TaskManager.Controllers
 
             ViewBag.Title = "Index";
             ViewBag.All =  roles.GetAll();
-
-            var modules = HttpContext.ApplicationInstance.Modules;
-            string[] modArray = modules.AllKeys;
-
-            return View(modArray);
+            
+            /*string[] modArray = HttpContext.ApplicationInstance.Modules.AllKeys;
+            return View(modArray);*/
+            return View();
         }
 
-        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Title = "About";
             return View();
         }
-
-        [AllowAnonymous]
+        
         public ActionResult Contact()
         {
             ViewBag.Title = "Contact";

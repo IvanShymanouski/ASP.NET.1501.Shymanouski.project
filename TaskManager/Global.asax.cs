@@ -38,6 +38,8 @@ namespace TaskManager
         {
             var config = ConfigHelper.Get<AreasAccessSettings>();
 
+            AreasAccess.Roles = new Dictionary<string, string>(0);
+
             foreach (AreaAccessElement areaAssecc in config.AreasAccess)
             {
                 AreasAccess.Roles[areaAssecc.Name] = areaAssecc.Roles;

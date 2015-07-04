@@ -16,7 +16,7 @@ namespace TaskManager.Authentification
 
         public bool IsInRole(string roleName)
         {
-            return CustomRoleProvider.IsUserInRole(identity,roleName);
+            return CustomRoleProvider.IsUserInRoles(identity,new string[] {roleName});
         }
 
         public IIdentity Identity

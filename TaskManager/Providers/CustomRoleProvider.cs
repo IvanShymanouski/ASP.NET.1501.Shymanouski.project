@@ -35,23 +35,29 @@ namespace TaskManager.Providers
             }
             return userRoles;
         }
-
-        public static bool IsUserInRole(IIdentity identity, string roleName)
+        
+        /// <returns>true if user have role from roles</returns>
+        public static bool IsUserInRoles(IIdentity identity, IEnumerable<string> roleNames)
         {
-            bool inRole = false;
-            var user = identity as Identity;
+            Identity user = identity as Identity;
+            bool inRoles = false;
 
             if (null != user)
-            foreach (var role in user.Roles)
             {
-                if (roleName == role)
+                IRoleUserService roleUsers = (IRoleUserService)System.Web.Mvc.DependencyResolver.Current.GetService(typeof(IRoleUserService));
+
+                foreach (var roleName in roleNames)
                 {
-                    inRole = true;
-                    break;
+                    Guid roleId = GetRoleId(roleName);
+                    if (null != roleUsers.Find(x => x.RoleId == roleId && user.Id == x.UserId))
+                    {
+                        inRoles = true;
+                        break;
+                    }
                 }
             }
 
-            return inRole;
+            return inRoles;
         }
 
         public static string[] GetAllRoles()

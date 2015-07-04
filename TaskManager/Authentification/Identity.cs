@@ -14,14 +14,12 @@ namespace TaskManager.Authentification
             if (current == null)
             {
                 Login = "Guest";
-                Roles = new string[] { "unauthorized" };
                 return;
             }
 
             Id = current.Id;
             Login = current.Login;
             Email = current.Email;
-            Roles = current.Roles ?? new string[] { "unauthorized" };
             RememberMe = current.RememberMe;
         }
 
@@ -30,14 +28,12 @@ namespace TaskManager.Authentification
             if (user == null)
             {
                 Login = "Guest";
-                Roles = new string[] { "unauthorized" };
                 return;
             }
 
             Id = user.Id;
             Login = user.Login;
             Email = user.Email;
-            Roles = CustomRoleProvider.GetRolesForUser(user.Email);
         }
 
         public Identity(Cookie user)
@@ -45,20 +41,17 @@ namespace TaskManager.Authentification
             if (user == null)
             {
                 Login = "Guest";
-                Roles = new string[] { "unauthorized" };
                 return;
             }
 
             Id = user.Id;
             Login = user.Login;
             Email = user.Email;
-            Roles = user.Roles ?? new string[] { "unauthorized" };
         }
 
         public Guid Id { get; set; }
         public string Login { get; set; }
         public string Email { get; set; }
-        public IEnumerable<string> Roles { get; set; }
         public bool RememberMe { get; set; }
 
         #region IIdentity Members

@@ -28,8 +28,7 @@ namespace TaskManager.Authentification
                 Id = user.Id,
                 Login = user.Login,
                 Email = user.Email,
-                RememberMe = createPersistentCookie,
-                Roles = user.Roles ?? new string[] { "unauthorized" }
+                RememberMe = createPersistentCookie
             };
 
             string userData = JsonConvert.SerializeObject(cookie);
